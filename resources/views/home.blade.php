@@ -4,9 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Clinic Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <title>Layanan Konseling Sebelas</title>
 
   <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
@@ -15,10 +13,10 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}"rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
@@ -28,155 +26,225 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Clinic
-  * Template URL: https://bootstrapmade.com/clinic-bootstrap-template/
-  * Updated: Jul 23 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <style>
+    /* Smooth scrolling untuk seluruh halaman */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Offset untuk fixed header */
+    section {
+      scroll-margin-top: 100px;
+    }
+
+    /* Custom styling untuk section guru */
+    #guru {
+      background-color: #f8f9fa;
+      padding: 80px 0;
+    }
+
+    #guru .section-title h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    #guru .section-title p {
+      font-size: 16px;
+      color: #6c757d;
+    }
+
+    /* Doctor/Guru Card Styling */
+    .doctor-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doctor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .doctor-image {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* Aspect ratio 1:1 untuk foto bulat sempurna */
+      overflow: hidden;
+      background: #f0f4ff;
+    }
+
+    .doctor-image img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      height: 85%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 8px solid rgba(255, 255, 255, 0.95);
+      transition: all 0.3s ease;
+    }
+
+    .doctor-card:hover .doctor-image img {
+      transform: translate(-50%, -50%) scale(1.05);
+      border-color: #ffffff;
+    }
+
+    .doctor-content {
+      padding: 30px 25px;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .doctor-content h4 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .doctor-content .specialty {
+      display: inline-block;
+      color: #667eea;
+      font-size: 14px;
+      font-weight: 600;
+      background: rgba(102, 126, 234, 0.1);
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-top: 5px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 991px) {
+      .doctor-card {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #guru {
+        padding: 60px 0;
+      }
+
+      #guru .section-title h2 {
+        font-size: 28px;
+      }
+
+      .doctor-content h4 {
+        font-size: 18px;
+      }
+    }
+
+    /* Contact Section Styling */
+    #contact {
+      padding: 80px 0;
+    }
+
+    #contact .section-title h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    #contact .section-title p {
+      font-size: 16px;
+      color: #6c757d;
+    }
+
+    .info-item {
+      background: #ffffff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .info-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .info-item i {
+      font-size: 40px;
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+
+    .info-item h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+
+    .info-item p {
+      font-size: 15px;
+      color: #6c757d;
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 
 <body class="index-page">
 
+  <!-- HEADER -->
   <header id="header" class="header fixed-top">
+    <div class="topbar d-flex align-items-center dark-background"></div>
 
-    <div class="topbar d-flex align-items-center dark-background">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
-        </div>
-        <div class="social-links d-none d-md-flex align-items-center">
-          <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-    </div><!-- End Top Bar -->
-
-    <div class="branding d-flex align-items-cente">
-
+    <div class="branding d-flex align-items-center">
       <div class="container position-relative d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <!-- Uncomment the line below if you also wish to use an image logo -->
-          <!-- <img src="assets/img/logo.webp" alt=""> -->
-          <h1 class="sitename">Clinic</h1>
+        <a href="#hero" class="logo d-flex align-items-center">
+          <h1 class="sitename">Layanan Konseling Sebelas</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="departments.html">Departments</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="doctors.html">Doctors</a></li>
-            <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="department-details.html">Department Details</a></li>
-                <li><a href="service-details.html">Service Details</a></li>
-                <li><a href="appointment.html">Appointment</a></li>
-                <li><a href="testimonials.html">Testimonials</a></li>
-                <li><a href="faq.html">Frequently Asked Questions</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="404.html">404</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-              <ul>
-                <li><a href="#">Dropdown 1</a></li>
-                <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                  <ul>
-                    <li><a href="#">Deep Dropdown 1</a></li>
-                    <li><a href="#">Deep Dropdown 2</a></li>
-                    <li><a href="#">Deep Dropdown 3</a></li>
-                    <li><a href="#">Deep Dropdown 4</a></li>
-                    <li><a href="#">Deep Dropdown 5</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Dropdown 2</a></li>
-                <li><a href="#">Dropdown 3</a></li>
-                <li><a href="#">Dropdown 4</a></li>
-              </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#tentang-kami">Tentang Kami</a></li>
+            <li><a href="#guru">Guru</a></li>
+            <li><a href="#contact">Kontak</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
       </div>
-
     </div>
-
   </header>
 
   <main class="main">
 
-    <!-- Hero Section -->
+    <!-- HERO SECTION -->
     <section id="hero" class="hero section">
-
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-
         <div class="row align-items-center">
+
           <div class="col-lg-6">
             <div class="hero-content">
-              <div class="trust-badges mb-4" data-aos="fade-right" data-aos-delay="200">
-                <div class="badge-item">
-                  <i class="bi bi-shield-check"></i>
-                  <span>Accredited</span>
-                </div>
-                <div class="badge-item">
-                  <i class="bi bi-clock"></i>
-                  <span>24/7 Emergency</span>
-                </div>
-                <div class="badge-item">
-                  <i class="bi bi-star-fill"></i>
-                  <span>4.9/5 Rating</span>
-                </div>
-              </div>
-
               <h1 data-aos="fade-right" data-aos-delay="300">
-                Excellence in <span class="highlight">Healthcare</span> With Compassionate Care
+                Layanan Bimbingan <span class="highlight">Konseling</span> Digital Untuk Siswa
               </h1>
 
               <p class="hero-description" data-aos="fade-right" data-aos-delay="400">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                Sistem konseling online yang mempermudah siswa membuat janji, berkonsultasi, dan memantau perkembangan.
               </p>
 
-              <div class="hero-stats mb-4" data-aos="fade-right" data-aos-delay="500">
-                <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="2" class="purecounter"></span>+</h3>
-                  <p>Years Experience</p>
-                </div>
-                <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="2" class="purecounter"></span>+</h3>
-                  <p>Patients Treated</p>
-                </div>
-                <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="2" class="purecounter"></span>+</h3>
-                  <p>Medical Experts</p>
-                </div>
-              </div>
-
               <div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
-                <a href="appointment.html" class="btn btn-primary">Book Appointment</a>
-                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="btn btn-outline glightbox">
-                  <i class="bi bi-play-circle me-2"></i>
-                  Watch Our Story
-                </a>
-              </div>
-
-              <div class="emergency-contact" data-aos="fade-right" data-aos-delay="700">
-                <div class="emergency-icon">
-                  <i class="bi bi-telephone-fill"></i>
-                </div>
-                <div class="emergency-info">
-                  <small>Emergency Hotline</small>
-                  <strong>+1 (555) 911-2468</strong>
-                </div>
+                <a href="login.php" class="btn btn-primary">Login</a>
               </div>
             </div>
           </div>
@@ -184,727 +252,169 @@
           <div class="col-lg-6">
             <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
               <div class="main-image">
-                <img src="assets/img/health/staff-10.webp" alt="Modern Healthcare Facility" class="img-fluid">
-                <div class="floating-card appointment-card">
-                  <div class="card-icon">
-                    <i class="bi bi-calendar-check"></i>
-                  </div>
-                  <div class="card-content">
-                    <h6>Next Available</h6>
-                    <p>Today 2:30 PM</p>
-                    <small>Dr. Sarah Johnson</small>
-                  </div>
-                </div>
-                <div class="floating-card rating-card">
-                  <div class="card-content">
-                    <div class="rating-stars">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                    </div>
-                    <h6>4.9/5</h6>
-                    <small>1,234 Reviews</small>
-                  </div>
-                </div>
-              </div>
-              <div class="background-elements">
-                <div class="element element-1"></div>
-                <div class="element element-2"></div>
-                <div class="element element-3"></div>
+                <img src="assets/img/health/staff-10.webp" alt="Hero Image" class="img-fluid">
               </div>
             </div>
           </div>
+
         </div>
-
       </div>
+    </section>
 
-    </section><!-- /Hero Section -->
-
-    <!-- Home About Section -->
-    <section id="home-about" class="home-about section">
-
+    <!-- HOME ABOUT / TENTANG KAMI -->
+    <section id="tentang-kami" class="home-about section">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-
         <div class="row align-items-center">
+
           <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
             <div class="about-content">
-              <h2 class="section-heading">Compassionate Care, Advanced Medicine</h2>
-              <p class="lead-text">For over two decades, we've been dedicated to providing exceptional healthcare that combines cutting-edge medical technology with the personal touch our patients deserve.</p>
 
-              <p>Our multidisciplinary team of specialists works collaboratively to ensure every patient receives comprehensive care tailored to their unique needs. From preventive services to complex procedures, we maintain the highest standards of medical excellence while fostering an environment of trust and healing.</p>
+              <h2 class="section-heading">Tentang Kami</h2>
 
-              <div class="stats-grid">
-                <div class="stat-item">
-                  <div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="1"></div>
-                  <div class="stat-label">Patients Served</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1"></div>
-                  <div class="stat-label">Years of Excellence</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number purecounter" data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1"></div>
-                  <div class="stat-label">Medical Specialists</div>
-                </div>
-              </div>
+              <p>
+                Bimbingan Konseling SMKN 11 Bandung kini hadir dalam bentuk layanan digital untuk meningkatkan efektivitas dan keterjangkauan pelayanan. 
+                Sistem ini mempermudah proses konsultasi, pencatatan kasus, penjadwalan, serta komunikasi antara siswa dan guru BK.
+                Kami berupaya memberikan layanan terbaik demi mendukung proses pembinaan, pengembangan karakter, serta penyelesaian permasalahan siswa secara profesional.
+              </p>
 
-              <div class="cta-section">
-                <a href="about.html" class="btn-primary">Learn More About Us</a>
-              </div>
             </div>
           </div>
 
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
             <div class="about-visual">
-              <div class="main-image">
-                <img src="assets/img/health/facilities-9.webp" alt="Modern medical facility" class="img-fluid">
+              <img src="assets/img/health/facilities-9.webp" alt="About Image" class="img-fluid">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- GURU SECTION -->
+    <section id="guru" class="section">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title text-center mb-5">
+          <h2>Guru Bimbingan Konseling</h2>
+          <p>Tim profesional yang siap membantu Anda</p>
+        </div>
+
+        <div class="row gy-4 justify-content-center">
+
+          <!-- CARD 1 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/health/staff-1.webp" class="img-fluid" alt="Suci Nur Fitriyanti">
               </div>
-              <div class="floating-card">
-                <div class="card-content">
-                  <div class="icon">
-                    <i class="bi bi-heart-pulse"></i>
-                  </div>
-                  <div class="card-text">
-                    <h4>24/7 Emergency Care</h4>
-                    <p>Always here when you need us most</p>
-                  </div>
-                </div>
-              </div>
-              <div class="experience-badge">
-                <div class="badge-content">
-                  <span class="years">25+</span>
-                  <span class="text">Years of Trusted Care</span>
-                </div>
+              <div class="doctor-content">
+                <h4>Suci Nur Fitriyanti, S.Pd</h4>
+                <span class="specialty">Guru BK</span>
               </div>
             </div>
           </div>
+
+          <!-- CARD 2 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/health/staff-2.webp" class="img-fluid" alt="Evi Febry Damayanti">
+              </div>
+              <div class="doctor-content">
+                <h4>Evi Febry Damayanti, S.Pd</h4>
+                <span class="specialty">Guru BK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/health/staff-3.webp" class="img-fluid" alt="Ratih Pertiwi">
+              </div>
+              <div class="doctor-content">
+                <h4>Ratih Pertiwi, S.Pd</h4>
+                <span class="specialty">Guru BK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/health/staff-4.webp" class="img-fluid" alt="Wening Wigati">
+              </div>
+              <div class="doctor-content">
+                <h4>Dra. Wening Wigati, SE, M.Si</h4>
+                <span class="specialty">Guru BK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="500">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/health/staff-1.webp" class="img-fluid" alt="Ameliya Purnama Putri">
+              </div>
+              <div class="doctor-content">
+                <h4>Rr. Ameliya Purnama Putri, S.Pd</h4>
+                <span class="specialty">Guru BK</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+      <div class="container" data-aos="fade-up">
+        
+        <div class="section-title text-center mb-5">
+          <h2>Hubungi Kami</h2>
+          <p>Kami siap membantu Anda</p>
+        </div>
+
+        <div class="row gy-4">
+          
+          <div class="col-lg-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-geo-alt"></i>
+              <h3>Alamat</h3>
+              <p>Jl. Raya Cilember, RT.01/RW.04, Sukaraja, Cicendo, Bandung, Jawa Barat 40153</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-telephone"></i>
+              <h3>Telepon</h3>
+              <p>(022) 6652442</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="info-item d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-envelope"></i>
+              <h3>Email</h3>
+              <p>info@smkn11bdg.sch.id</p>
+            </div>
+          </div>
+
         </div>
 
       </div>
-
-    </section><!-- /Home About Section -->
-
-    <!-- Featured Departments Section -->
-    <section id="featured-departments" class="featured-departments section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Featured Departments</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-5">
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-            <div class="specialty-card">
-              <div class="specialty-content">
-                <div class="specialty-meta">
-                  <span class="specialty-label">Specialized Care</span>
-                </div>
-                <h3>Cardiovascular Medicine</h3>
-                <p>Advanced diagnostic imaging and interventional procedures for comprehensive heart health management with personalized treatment protocols.</p>
-                <div class="specialty-features">
-                  <span><i class="bi bi-check-circle-fill"></i>24/7 Emergency Cardiac Care</span>
-                  <span><i class="bi bi-check-circle-fill"></i>Minimally Invasive Procedures</span>
-                </div>
-                <a href="department-details.html" class="specialty-link">
-                  Explore Cardiology <i class="bi bi-arrow-right"></i>
-                </a>
-              </div>
-              <div class="specialty-visual">
-                <img src="assets/img/health/cardiology-1.webp" alt="Cardiovascular Medicine" class="img-fluid">
-                <div class="visual-overlay">
-                  <i class="bi bi-heart-pulse"></i>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Specialty Card -->
-
-          <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="200">
-            <div class="specialty-card">
-              <div class="specialty-content">
-                <div class="specialty-meta">
-                  <span class="specialty-label">Expert Care</span>
-                </div>
-                <h3>Neurological Sciences</h3>
-                <p>Cutting-edge neuroimaging and neurosurgical expertise for complex brain and spinal cord conditions with innovative treatment approaches.</p>
-                <div class="specialty-features">
-                  <span><i class="bi bi-check-circle-fill"></i>Advanced Brain Imaging</span>
-                  <span><i class="bi bi-check-circle-fill"></i>Robotic Surgery</span>
-                </div>
-                <a href="department-details.html" class="specialty-link">
-                  Explore Neurology <i class="bi bi-arrow-right"></i>
-                </a>
-              </div>
-              <div class="specialty-visual">
-                <img src="assets/img/health/neurology-4.webp" alt="Neurological Sciences" class="img-fluid">
-                <div class="visual-overlay">
-                  <i class="bi bi-cpu"></i>
-                </div>
-              </div>
-            </div>
-          </div><!-- End Specialty Card -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="department-highlight">
-              <div class="highlight-icon">
-                <i class="bi bi-shield-plus"></i>
-              </div>
-              <h4>Orthopedic Surgery</h4>
-              <p>Comprehensive musculoskeletal care utilizing advanced arthroscopic techniques and joint replacement procedures.</p>
-              <ul class="highlight-list">
-                <li>Sports Medicine</li>
-                <li>Joint Replacement</li>
-                <li>Spine Surgery</li>
-              </ul>
-              <a href="department-details.html" class="highlight-cta">Learn More</a>
-            </div>
-          </div><!-- End Department Highlight -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="department-highlight">
-              <div class="highlight-icon">
-                <i class="bi bi-people"></i>
-              </div>
-              <h4>Pediatric Care</h4>
-              <p>Child-centered healthcare services from newborn to adolescence with family-focused treatment approaches.</p>
-              <ul class="highlight-list">
-                <li>Neonatal Intensive Care</li>
-                <li>Developmental Pediatrics</li>
-                <li>Pediatric Surgery</li>
-              </ul>
-              <a href="department-details.html" class="highlight-cta">Learn More</a>
-            </div>
-          </div><!-- End Department Highlight -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-            <div class="department-highlight">
-              <div class="highlight-icon">
-                <i class="bi bi-activity"></i>
-              </div>
-              <h4>Cancer Treatment</h4>
-              <p>Multidisciplinary oncology program offering personalized cancer care with latest therapeutic innovations.</p>
-              <ul class="highlight-list">
-                <li>Precision Medicine</li>
-                <li>Immunotherapy</li>
-                <li>Radiation Oncology</li>
-              </ul>
-              <a href="department-details.html" class="highlight-cta">Learn More</a>
-            </div>
-          </div><!-- End Department Highlight -->
-
-        </div>
-
-        <div class="emergency-banner" data-aos="fade-up" data-aos-delay="400">
-          <div class="row align-items-center">
-            <div class="col-lg-8">
-              <div class="emergency-content">
-                <h3>Emergency Services Available 24/7</h3>
-                <p>Our emergency department is equipped with state-of-the-art technology and staffed by board-certified emergency physicians ready to provide immediate care.</p>
-              </div>
-            </div>
-            <div class="col-lg-4 text-lg-end">
-              <a href="tel:+15551234567" class="emergency-btn">
-                <i class="bi bi-telephone-fill"></i>
-                Call Emergency: (555) 123-4567
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Featured Departments Section -->
-
-    <!-- Featured Services Section -->
-    <section id="featured-services" class="featured-services section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Featured Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row g-0">
-
-          <div class="col-lg-8" data-aos="fade-right" data-aos-delay="200">
-            <div class="featured-service-main">
-              <div class="service-image-wrapper">
-                <img src="assets/img/health/consultation-4.webp" alt="Premier Healthcare Services" class="img-fluid" loading="lazy">
-                <div class="service-overlay">
-                  <div class="service-badge">
-                    <i class="bi bi-heart-pulse"></i>
-                    <span>Emergency Care</span>
-                  </div>
-                </div>
-              </div>
-              <div class="service-details">
-                <h2>Comprehensive Healthcare Excellence</h2>
-                <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae donec velit neque.</p>
-                <a href="#" class="main-cta">Explore Our Services</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
-            <div class="services-sidebar">
-
-              <div class="service-item" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-icon-wrapper">
-                  <i class="bi bi-capsule"></i>
-                </div>
-                <div class="service-info">
-                  <h4>Dermatology Clinic</h4>
-                  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-                  <a href="#" class="service-link">Learn More</a>
-                </div>
-              </div>
-
-              <div class="service-item" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-icon-wrapper">
-                  <i class="bi bi-bandaid"></i>
-                </div>
-                <div class="service-info">
-                  <h4>Surgery Center</h4>
-                  <p>Donec rutrum congue leo eget malesuada curabitur arcu erat accumsan id imperdiet et porttitor at sem.</p>
-                  <a href="#" class="service-link">Learn More</a>
-                </div>
-              </div>
-
-              <div class="service-item" data-aos="fade-up" data-aos-delay="600">
-                <div class="service-icon-wrapper">
-                  <i class="bi bi-activity"></i>
-                </div>
-                <div class="service-info">
-                  <h4>Diagnostics Lab</h4>
-                  <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui cras ultricies ligula sed magna.</p>
-                  <a href="#" class="service-link">Learn More</a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <div class="specialties-grid" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
-
-            <div class="col-lg-3 col-md-6">
-              <div class="specialty-card">
-                <div class="specialty-image">
-                  <img src="assets/img/health/maternal-2.webp" alt="Maternal Care" class="img-fluid" loading="lazy">
-                </div>
-                <div class="specialty-content">
-                  <h5>Maternal Care</h5>
-                  <span>Expert pregnancy &amp; delivery support</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-              <div class="specialty-card">
-                <div class="specialty-image">
-                  <img src="assets/img/health/vaccination-3.webp" alt="Vaccination" class="img-fluid" loading="lazy">
-                </div>
-                <div class="specialty-content">
-                  <h5>Vaccination</h5>
-                  <span>Complete immunization programs</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-              <div class="specialty-card">
-                <div class="specialty-image">
-                  <img src="assets/img/health/emergency-1.webp" alt="Emergency Care" class="img-fluid" loading="lazy">
-                </div>
-                <div class="specialty-content">
-                  <h5>Emergency Care</h5>
-                  <span>24/7 critical care services</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-              <div class="specialty-card">
-                <div class="specialty-image">
-                  <img src="assets/img/health/facilities-6.webp" alt="Advanced Tech" class="img-fluid" loading="lazy">
-                </div>
-                <div class="specialty-content">
-                  <h5>Advanced Technology</h5>
-                  <span>State-of-the-art medical equipment</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Featured Services Section -->
-
-    <!-- Find A Doctor Section -->
-    <section id="find-a-doctor" class="find-a-doctor section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Find A Doctor</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row justify-content-center mb-5" data-aos="fade-up" data-aos-delay="200">
-          <div class="col-lg-8 text-center">
-            <div class="search-section">
-              <h3 class="search-title">Find Your Perfect Healthcare Provider</h3>
-              <p class="search-subtitle">Search through our comprehensive directory of experienced medical professionals</p>
-              <form class="search-form" action="forms/doctor-search.php" method="get">
-                <div class="search-input-group">
-                  <div class="input-wrapper">
-                    <i class="bi bi-person"></i>
-                    <input type="text" class="form-control" name="doctor_name" placeholder="Enter doctor name">
-                  </div>
-                  <div class="select-wrapper">
-                    <i class="bi bi-heart-pulse"></i>
-                    <select class="form-select" name="specialty">
-                      <option value="">All Specialties</option>
-                      <option value="cardiology">Cardiology</option>
-                      <option value="neurology">Neurology</option>
-                      <option value="orthopedics">Orthopedics</option>
-                      <option value="pediatrics">Pediatrics</option>
-                      <option value="dermatology">Dermatology</option>
-                      <option value="oncology">Oncology</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="search-btn">
-                    <i class="bi bi-search"></i>
-                    Find Doctors
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="doctors-grid" data-aos="fade-up" data-aos-delay="300">
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="100">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-2.webp" alt="Dr. Amanda Foster" class="img-fluid">
-                <div class="status-indicator available"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. Amanda Foster</h4>
-                <span class="specialty-tag">Cardiology Specialist</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>14 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <span class="rating-score">4.9</span>
-              <span class="review-count">(127 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Book Now</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="200">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-6.webp" alt="Dr. Marcus Johnson" class="img-fluid">
-                <div class="status-indicator busy"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. Marcus Johnson</h4>
-                <span class="specialty-tag">Neurology Expert</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>16 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-half"></i>
-              </div>
-              <span class="rating-score">4.8</span>
-              <span class="review-count">(89 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Schedule</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="300">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-4.webp" alt="Dr. Rachel Williams" class="img-fluid">
-                <div class="status-indicator available"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. Rachel Williams</h4>
-                <span class="specialty-tag">Pediatrics Care</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>11 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <span class="rating-score">5.0</span>
-              <span class="review-count">(203 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Book Now</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="400">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-8.webp" alt="Dr. David Chen" class="img-fluid">
-                <div class="status-indicator offline"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. David Chen</h4>
-                <span class="specialty-tag">Orthopedic Surgery</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>22 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-half"></i>
-              </div>
-              <span class="rating-score">4.7</span>
-              <span class="review-count">(156 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Schedule</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="500">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-11.webp" alt="Dr. Victoria Torres" class="img-fluid">
-                <div class="status-indicator available"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. Victoria Torres</h4>
-                <span class="specialty-tag">Dermatology Care</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>9 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star"></i>
-              </div>
-              <span class="rating-score">4.5</span>
-              <span class="review-count">(74 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Book Now</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-          <div class="doctor-profile" data-aos="zoom-in" data-aos-delay="600">
-            <div class="profile-header">
-              <div class="doctor-avatar">
-                <img src="assets/img/health/staff-14.webp" alt="Dr. Benjamin Lee" class="img-fluid">
-                <div class="status-indicator available"></div>
-              </div>
-              <div class="doctor-details">
-                <h4>Dr. Benjamin Lee</h4>
-                <span class="specialty-tag">Oncology Treatment</span>
-                <div class="experience-info">
-                  <i class="bi bi-award"></i>
-                  <span>19 years experience</span>
-                </div>
-              </div>
-            </div>
-            <div class="rating-section">
-              <div class="stars">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-              </div>
-              <span class="rating-score">4.9</span>
-              <span class="review-count">(194 reviews)</span>
-            </div>
-            <div class="action-buttons">
-              <a href="#" class="btn-secondary">View Details</a>
-              <a href="#" class="btn-primary">Schedule</a>
-            </div>
-          </div><!-- End Doctor Profile -->
-
-        </div>
-
-        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="700">
-          <a href="doctors.html" class="btn-view-all">
-            View All Doctors
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-
-      </div>
-
-    </section><!-- /Find A Doctor Section -->
-
-    <!-- Call To Action Section -->
-    <section id="call-to-action" class="call-to-action section light-background">
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="hero-content">
-          <div class="row align-items-center">
-
-            <div class="col-lg-6">
-              <div class="content-wrapper" data-aos="fade-up" data-aos-delay="200">
-                <h1>Excellence in Medical Care, Every Day</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-
-                <div class="cta-wrapper">
-                  <a href="appointment.html" class="primary-cta">
-                    <span>Schedule Consultation</span>
-                    <i class="bi bi-arrow-right"></i>
-                  </a>
-                  <a href="services.html" class="secondary-cta">
-                    <span>Explore Services</span>
-                    <i class="bi bi-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="image-container" data-aos="fade-left" data-aos-delay="300">
-                <img src="assets/img/health/facilities-9.webp" alt="Medical Excellence" class="img-fluid">
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="features-section">
-
-          <div class="row g-0">
-
-            <div class="col-lg-4">
-              <div class="feature-block" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon">
-                  <i class="bi bi-shield-check"></i>
-                </div>
-                <h3>Advanced Technology</h3>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="feature-block" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon">
-                  <i class="bi bi-clock"></i>
-                </div>
-                <h3>24/7 Availability</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur.</p>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="feature-block" data-aos="fade-up" data-aos-delay="400">
-                <div class="feature-icon">
-                  <i class="bi bi-people"></i>
-                </div>
-                <h3>Expert Team</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem.</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="contact-block">
-          <div class="row">
-
-            <div class="col-lg-8">
-              <div class="contact-content" data-aos="fade-up" data-aos-delay="200">
-                <h2>Need Immediate Medical Assistance?</h2>
-                <p>Our emergency response team is available around the clock to provide immediate medical support when you need it most.</p>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="contact-actions" data-aos="fade-up" data-aos-delay="300">
-                <a href="tel:5551234567" class="emergency-call">
-                  <i class="bi bi-telephone"></i>
-                  <span>(555) 123-4567</span>
-                </a>
-                <a href="contact.html" class="contact-link">Find Location</a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </section><!-- /Call To Action Section -->
+    </section>
 
   </main>
 
+  <!-- FOOTER -->
   <footer id="footer" class="footer-16 footer position-relative">
-
     <div class="container">
 
       <div class="footer-main" data-aos="fade-up" data-aos-delay="100">
@@ -912,25 +422,26 @@
 
           <div class="col-lg-5">
             <div class="brand-section">
-              <a href="index.html" class="logo d-flex align-items-center mb-4">
-                <span class="sitename">Clinic</span>
+              <a href="#hero" class="logo d-flex align-items-center mb-4">
+                <span class="sitename">Layanan Konseling Sebelas</span>
               </a>
-              <p class="brand-description">Crafting exceptional digital experiences through thoughtful design and innovative solutions that elevate your brand presence.</p>
+
+              <p class="brand-description">
+                Layanan Bimbingan Konseling digital yang membantu siswa mendapatkan pendampingan secara mudah dan profesional.
+              </p>
 
               <div class="contact-info mt-5">
                 <div class="contact-item">
                   <i class="bi bi-geo-alt"></i>
-                  <span>123 Creative Boulevard, Design District, NY 10012</span>
+                  <span>Alamat: Jl. Raya Cilember, RT.01/RW.04, Sukaraja, Cicendo, Bandung, Jawa Barat 40153</span>
                 </div>
+
                 <div class="contact-item">
                   <i class="bi bi-telephone"></i>
-                  <span>+1 (555) 987-6543</span>
-                </div>
-                <div class="contact-item">
-                  <i class="bi bi-envelope"></i>
-                  <span>hello@designstudio.com</span>
+                  <span>(022) 6652442</span>
                 </div>
               </div>
+
             </div>
           </div>
 
@@ -940,52 +451,44 @@
 
                 <div class="col-6 col-lg-3">
                   <div class="nav-column">
-                    <h6>Studio</h6>
+                    <h6>Informasi</h6>
                     <nav class="footer-nav">
-                      <a href="#">Our Story</a>
-                      <a href="#">Design Process</a>
-                      <a href="#">Portfolio</a>
-                      <a href="#">Case Studies</a>
-                      <a href="#">Awards</a>
+                      <a href="#tentang-kami">Tentang BK</a>
+                      <a href="#">Layanan</a>
+                      <a href="#">Konsultasi</a>
+                      <a href="#">Panduan</a>
                     </nav>
                   </div>
                 </div>
 
                 <div class="col-6 col-lg-3">
                   <div class="nav-column">
-                    <h6>Services</h6>
+                    <h6>Fitur</h6>
                     <nav class="footer-nav">
-                      <a href="#">Brand Identity</a>
-                      <a href="#">Web Design</a>
-                      <a href="#">Mobile Apps</a>
-                      <a href="#">Digital Strategy</a>
-                      <a href="#">Consultation</a>
+                      <a href="#">Buat Janji</a>
+                      <a href="#">Riwayat Konseling</a>
+                      <a href="#guru">Guru BK</a>
                     </nav>
                   </div>
                 </div>
 
                 <div class="col-6 col-lg-3">
                   <div class="nav-column">
-                    <h6>Resources</h6>
+                    <h6>Bantuan</h6>
                     <nav class="footer-nav">
-                      <a href="#">Design Blog</a>
-                      <a href="#">Style Guide</a>
-                      <a href="#">Free Assets</a>
-                      <a href="#">Tutorials</a>
-                      <a href="#">Inspiration</a>
+                      <a href="#">FAQ</a>
+                      <a href="#contact">Hubungi Kami</a>
+                      <a href="#">Kebijakan Privasi</a>
                     </nav>
                   </div>
                 </div>
 
                 <div class="col-6 col-lg-3">
                   <div class="nav-column">
-                    <h6>Connect</h6>
+                    <h6>Lainnya</h6>
                     <nav class="footer-nav">
-                      <a href="#">Start Project</a>
-                      <a href="#">Schedule Call</a>
-                      <a href="#">Join Newsletter</a>
-                      <a href="#">Follow Updates</a>
-                      <a href="#">Partnership</a>
+                      <a href="#">Syarat & Ketentuan</a>
+                      <a href="#">Feedback</a>
                     </nav>
                   </div>
                 </div>
@@ -1001,30 +504,11 @@
 
     <div class="footer-bottom">
       <div class="container">
-        <div class="bottom-content" data-aos="fade-up" data-aos-delay="300">
-          <div class="row align-items-center">
-
-            <div class="col-lg-6">
-              <div class="copyright">
-                <p>© <span class="sitename">Clinic</span>. All rights reserved.</p>
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="legal-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-                <div class="credits">
-                  <!-- All the links in the footer should remain intact. -->
-                  <!-- You can delete the links only if you've purchased the pro version. -->
-                  <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                  <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                  Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
-              </div>
-            </div>
-
+        <div class="bottom-content d-flex justify-content-between align-items-center">
+          <p>© 2025 Layanan Konseling Sebelas</p>
+          <div class="legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
           </div>
         </div>
       </div>
@@ -1033,10 +517,9 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 
   <!-- Vendor JS Files -->
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -1046,9 +529,58 @@
   <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 
-  <!-- Main JS File -->
+  <!-- Main JS -->
   <script src="assets/js/main.js"></script>
 
-</body>
+  <script>
+    // Smooth scroll untuk navigasi
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
 
+          // Update active class
+          document.querySelectorAll('.navmenu a').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+
+          // Close mobile menu if open
+          const navmenu = document.querySelector('.navmenu');
+          if (navmenu && navmenu.classList.contains('mobile-nav-active')) {
+            navmenu.classList.remove('mobile-nav-active');
+          }
+        }
+      });
+    });
+
+    // Update active menu saat scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section[id]');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.navmenu a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
 </html>
