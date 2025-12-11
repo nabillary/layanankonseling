@@ -8,32 +8,42 @@ use Illuminate\Http\Request;
 
 class RiwayatController extends Controller
 {
+    // ============================
     // SISWA - RIWAYAT
-    public function index()
+    // ============================
+    public function indexSiswa()
     {
-        $riwayat = Konseling::where('siswa_id', Auth::guard('siswa')->id())
+        $riwayat = Konseling::where('id_siswa', Auth::guard('siswa')->id())
             ->where('status', 'Selesai')
-            ->latest()
+            ->orderBy('tanggal', 'desc')
             ->get();
 
         return view('siswa.riwayat.index', compact('riwayat'));
     }
 
-    public function show($id)
+    public function showSiswa($id)
     {
         $data = Konseling::findOrFail($id);
         return view('siswa.riwayat.detail', compact('data'));
     }
 
 
-    // GURU - TAMBAH CATATAN RIWAYAT
-    public function store(Request $request, $id)
+    // ============================
+    // GURU - RIWAYAT
+    // ============================
+    public function indexGuru()
+    {
+        $riwayat = Konseling::where('id_guru', Auth::guard('guru')->id())
+            ->where('status', 'Selesai')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        return view('guru.riwayat.index', compact('riwayat'));
+    }
+
+    public function showGuru($id)
     {
         $data = Konseling::findOrFail($id);
-        $data->update([
-            'catatan_guru' => $request->catatan_guru
-        ]);
-
-        return back()->with('success', 'Catatan berhasil ditambahkan');
+        return view('guru.riwayat.detail', compact('data'));
     }
 }

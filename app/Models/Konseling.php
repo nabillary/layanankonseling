@@ -11,8 +11,7 @@ class Konseling extends Model
 
     protected $table = 'konseling';
     protected $primaryKey = 'id_konseling';
-    public $timestamps = false; // karena tabel kamu tidak memakai created_at dan updated_at
-
+    
     protected $fillable = [
         'id_siswa',
         'id_guru',

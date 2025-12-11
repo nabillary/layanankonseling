@@ -22,7 +22,7 @@ class KonselingController extends Controller
         ]);
 
         Konseling::create([
-            'siswa_id' => Auth::guard('siswa')->id(),
+            'id_siswa' => Auth::guard('siswa')->id(),
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
             'status' => 'Proses',

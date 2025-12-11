@@ -45,14 +45,9 @@ Route::middleware('auth:siswa')->group(function () {
 // ========================
 // GURU BK
 // ========================
-Route::middleware('auth:guru')->group(function () {
-
-    Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
-
-    Route::get('/guru/konseling', [KonselingController::class, 'index']);
-    Route::get('/guru/konseling/{id}', [KonselingController::class, 'show']);
-    Route::post('/guru/konseling/solusi/{id}', [KonselingController::class, 'solusi']);
-
-    Route::post('/guru/riwayat/add/{id}', [RiwayatController::class, 'store']);
-
-});
+Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
+Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
+Route::get('/guru/konseling', [KonselingController::class, 'index']);
+Route::get('/guru/konseling/{id}', [KonselingController::class, 'show']);
+ Route::get('/guru/riwayat', [RiwayatController::class, 'indexGuru']);
+Route::get('/guru/riwayat/{id}', [RiwayatController::class, 'showGuru']);
