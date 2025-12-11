@@ -37,22 +37,87 @@
       scroll-margin-top: 100px;
     }
 
-    /* Custom styling untuk section guru */
+    /* Header Styling */
+    #header .topbar {
+      background-color: #5A9FB5 !important;
+    }
+
+    #header .branding {
+      background-color: #5A9FB5 !important;
+    }
+
+    #header .sitename {
+      color: #ffffff !important;
+    }
+
+    #header .navmenu a {
+      color: #ffffff !important;
+      position: relative;
+    }
+
+    #header .navmenu a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #ffffff;
+      transition: width 0.3s ease;
+    }
+
+    #header .navmenu a:hover::after,
+    #header .navmenu a.active::after {
+      width: 100%;
+    }
+
+    #header .navmenu a:hover,
+    #header .navmenu a.active {
+      color: #ffffff !important;
+    }
+
+    /* Button Styling */
+    .btn-primary {
+      background-color: #5A9FB5 !important;
+      border-color: #5A9FB5 !important;
+      color: #ffffff !important;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #4A8FA5 !important;
+      border-color: #4A8FA5 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(90, 159, 181, 0.3);
+    }
+
+    /* Scroll Top Button */
+    #scroll-top {
+      background-color: #5A9FB5 !important;
+      color: #ffffff !important;
+    }
+
+    #scroll-top:hover {
+      background-color: #4A8FA5 !important;
+    }
     #guru {
-      background-color: #f8f9fa;
+      background-color: #CDE8E5;
       padding: 80px 0;
     }
 
     #guru .section-title h2 {
       font-size: 36px;
       font-weight: 700;
-      color: #2c3e50;
+      color: #5A9FB5;
       margin-bottom: 15px;
     }
 
     #guru .section-title p {
       font-size: 16px;
-      color: #6c757d;
+      color: #5A9FB5;
     }
 
     /* Doctor/Guru Card Styling */
@@ -60,7 +125,7 @@
       background: #ffffff;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 5px 25px rgba(90, 159, 181, 0.15);
       transition: all 0.3s ease;
       height: 100%;
       display: flex;
@@ -69,7 +134,7 @@
 
     .doctor-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 15px 40px rgba(90, 159, 181, 0.25);
     }
 
     .doctor-image {
@@ -77,7 +142,7 @@
       width: 100%;
       padding-top: 100%; /* Aspect ratio 1:1 untuk foto bulat sempurna */
       overflow: hidden;
-      background: #f0f4ff;
+      background: #EEF7FF;
     }
 
     .doctor-image img {
@@ -89,13 +154,13 @@
       height: 85%;
       object-fit: cover;
       border-radius: 50%;
-      border: 8px solid rgba(255, 255, 255, 0.95);
+      border: 8px solid #ffffff;
       transition: all 0.3s ease;
     }
 
     .doctor-card:hover .doctor-image img {
       transform: translate(-50%, -50%) scale(1.05);
-      border-color: #ffffff;
+      border-color: #CDE8E5;
     }
 
     .doctor-content {
@@ -110,17 +175,17 @@
     .doctor-content h4 {
       font-size: 20px;
       font-weight: 700;
-      color: #2c3e50;
+      color: #5A9FB5;
       margin-bottom: 8px;
       line-height: 1.3;
     }
 
     .doctor-content .specialty {
       display: inline-block;
-      color: #667eea;
+      color: #ffffff;
       font-size: 14px;
       font-weight: 600;
-      background: rgba(102, 126, 234, 0.1);
+      background: #5A9FB5;
       padding: 6px 20px;
       border-radius: 20px;
       margin-top: 5px;
@@ -150,52 +215,79 @@
     /* Contact Section Styling */
     #contact {
       padding: 80px 0;
+      background-color: #ffffff;
     }
 
     #contact .section-title h2 {
       font-size: 36px;
       font-weight: 700;
-      color: #2c3e50;
+      color: #5A9FB5;
       margin-bottom: 15px;
     }
 
     #contact .section-title p {
       font-size: 16px;
-      color: #6c757d;
+      color: #7AB2B2;
     }
 
     .info-item {
       background: #ffffff;
       padding: 40px 30px;
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 5px 20px rgba(90, 159, 181, 0.1);
       height: 100%;
       transition: all 0.3s ease;
+      border: 2px solid #CDE8E5;
     }
 
     .info-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 30px rgba(90, 159, 181, 0.2);
+      background: #EEF7FF;
+      border-color: #7AB2B2;
     }
 
     .info-item i {
       font-size: 40px;
-      color: #667eea;
+      color: #5A9FB5;
       margin-bottom: 20px;
     }
 
     .info-item h3 {
       font-size: 20px;
       font-weight: 700;
-      color: #2c3e50;
+      color: #5A9FB5;
       margin-bottom: 15px;
     }
 
     .info-item p {
       font-size: 15px;
-      color: #6c757d;
+      color: #5A9FB5;
       margin: 0;
       line-height: 1.6;
+    }
+
+    /* Hero Section Custom */
+    #hero {
+      background: linear-gradient(135deg, #CDE8E5 0%, #EEF7FF 100%);
+    }
+
+    #hero .highlight {
+      color: #5A9FB5 !important;
+    }
+
+    /* Tentang Kami Section */
+    #tentang-kami {
+      background-color: #ffffff;
+    }
+
+    #tentang-kami .section-heading {
+      color: #5A9FB5;
+    }
+
+    #tentang-kami p {
+      color: #7AB2B2;
+      line-height: 1.8;
     }
   </style>
 </head>
@@ -252,7 +344,7 @@
           <div class="col-lg-6">
             <div class="hero-visual" data-aos="fade-left" data-aos-delay="400">
               <div class="main-image">
-                <img src="assets/img/health/staff-10.webp" alt="Hero Image" class="img-fluid">
+                <img src="assets/img/homepict3.jpg" alt="Hero Image" class="img-fluid">
               </div>
             </div>
           </div>
@@ -282,7 +374,7 @@
 
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
             <div class="about-visual">
-              <img src="assets/img/health/facilities-9.webp" alt="About Image" class="img-fluid">
+              <img src="assets/img/homepict2.jpeg" alt="About Image" class="img-fluid">
             </div>
           </div>
 
@@ -305,7 +397,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/health/staff-1.webp" class="img-fluid" alt="Suci Nur Fitriyanti">
+                <img src="assets/img/bu_suci.jpg" class="img-fluid" alt="Suci Nur Fitriyanti">
               </div>
               <div class="doctor-content">
                 <h4>Suci Nur Fitriyanti, S.Pd</h4>
@@ -318,23 +410,10 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/health/staff-2.webp" class="img-fluid" alt="Evi Febry Damayanti">
+                <img src="assets/img/bu_evi.png" class="img-fluid" alt="Evi Febry Damayanti">
               </div>
               <div class="doctor-content">
                 <h4>Evi Febry Damayanti, S.Pd</h4>
-                <span class="specialty">Guru BK</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 3 -->
-          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/health/staff-3.webp" class="img-fluid" alt="Ratih Pertiwi">
-              </div>
-              <div class="doctor-content">
-                <h4>Ratih Pertiwi, S.Pd</h4>
                 <span class="specialty">Guru BK</span>
               </div>
             </div>
@@ -344,7 +423,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/health/staff-4.webp" class="img-fluid" alt="Wening Wigati">
+                <img src="assets/img/bu_wening.jpg" class="img-fluid" alt="Wening Wigati">
               </div>
               <div class="doctor-content">
                 <h4>Dra. Wening Wigati, SE, M.Si</h4>
@@ -357,7 +436,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="500">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/health/staff-1.webp" class="img-fluid" alt="Ameliya Purnama Putri">
+                <img src="assets/img/bu_amelia.png" class="img-fluid" alt="Ameliya Purnama Putri">
               </div>
               <div class="doctor-content">
                 <h4>Rr. Ameliya Purnama Putri, S.Pd</h4>
