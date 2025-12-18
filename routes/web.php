@@ -8,6 +8,10 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\KonselingController;
 use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\KonselingController as AdminKonselingController;
+use App\Http\Controllers\Admin\SiswaController as AdminSiswaController;
+use App\Http\Controllers\Admin\GuruController as AdminGuruController;
 
 
 // Landing Page
@@ -19,35 +23,61 @@ Route::get('/', function () {
 // ========================
 // LOGIN
 // ========================
-Route::get('/login/siswa', [AuthController::class, 'loginSiswaPage']);
-Route::post('/login/siswa', [AuthController::class, 'loginSiswa']);
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
-Route::get('/login/guru', [AuthController::class, 'loginGuruPage']);
-Route::post('/login/guru', [AuthController::class, 'loginGuru']);
-
-
+// LOGOUT
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // ========================
 // SISWA
 // ========================
-Route::middleware('auth:siswa')->group(function () {
-
+Route::middleware(['auth', 'role:siswa'])->group(function () {
     Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard']);
-
     Route::get('/siswa/konseling/ajukan', [KonselingController::class, 'create']);
     Route::post('/siswa/konseling/store', [KonselingController::class, 'store']);
-
     Route::get('/siswa/riwayat', [RiwayatController::class, 'index']);
     Route::get('/siswa/riwayat/{id}', [RiwayatController::class, 'show']);
-
 });
 
 
 // ========================
-// GURU BK
+// GURU
 // ========================
-Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
-Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
-Route::get('/guru/konseling', [KonselingController::class, 'index']);
-Route::get('/guru/konseling/{id}', [KonselingController::class, 'show']);
- Route::get('/guru/riwayat', [RiwayatController::class, 'indexGuru']);
-Route::get('/guru/riwayat/{id}', [RiwayatController::class, 'showGuru']);
+Route::middleware(['auth', 'role:guru'])->group(function () {
+    Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
+    Route::get('/guru/konseling', [KonselingController::class, 'index']);
+    Route::get('/guru/konseling/{id}', [KonselingController::class, 'show']);
+    Route::get('/guru/riwayat', [RiwayatController::class, 'indexGuru']);
+    Route::get('/guru/riwayat/{id}', [RiwayatController::class, 'showGuru']);
+    Route::get('/guru/profil', [GuruController::class, 'profil']);
+    Route::post('/guru/profil/update', [GuruController::class, 'updateProfil']);
+});
+
+
+// ========================
+// ADMIN
+// ========================
+Route::middleware(['auth', 'role:admin'])->group(function () {
+   Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+    
+    // Konseling (READ ONLY)
+    Route::get('/admin/konseling', [AdminKonselingController::class, 'index']);
+    Route::get('/admin/konseling/{id}', [AdminKonselingController::class, 'show']);
+
+    // CRUD SISWA
+    Route::get('/admin/siswa', [AdminSiswaController::class, 'index']);
+    Route::get('/admin/siswa/create', [AdminSiswaController::class, 'create']);
+    Route::post('/admin/siswa', [AdminSiswaController::class, 'store']);
+    Route::get('/admin/siswa/{id}/edit', [AdminSiswaController::class, 'edit']);
+    Route::put('/admin/siswa/{id}', [AdminSiswaController::class, 'update']);
+    Route::delete('/admin/siswa/{id}', [AdminSiswaController::class, 'destroy']);
+
+    // CRUD GURU
+    Route::get('/admin/guru', [AdminGuruController::class, 'index']);
+    Route::get('/admin/guru/create', [AdminGuruController::class, 'create']);
+    Route::post('/admin/guru', [AdminGuruController::class, 'store']);
+    Route::get('/admin/guru/{id}/edit', [AdminGuruController::class, 'edit']);
+    Route::put('/admin/guru/{id}', [AdminGuruController::class, 'update']);
+    Route::delete('/admin/guru/{id}', [AdminGuruController::class, 'destroy']);
+});
