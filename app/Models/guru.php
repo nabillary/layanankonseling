@@ -8,6 +8,7 @@ class Guru extends Authenticatable
 {
     protected $table = 'guru_bk';
     protected $primaryKey = 'id_guru';
+    public $timestamps = false;
 
     protected $fillable = [
         'nip',

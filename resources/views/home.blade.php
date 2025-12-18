@@ -472,7 +472,7 @@
               </p>
 
               <div class="hero-actions" data-aos="fade-right" data-aos-delay="600">
-                <a href="login.php" class="btn btn-primary">Login</a>
+                <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
               </div>
             </div>
           </div>

@@ -3,48 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Siswa;
-use App\Models\Guru;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // ==========================
-    // LOGIN SISWA
-    // ==========================
-    public function loginSiswaPage()
+    public function index()
     {
-        return view('auth.login_siswa');
+        return view('auth.login', ['title' => 'Login']);
     }
 
-    public function loginSiswa(Request $request)
+   public function login(Request $request)
     {
-        $credentials = $request->only('nis', 'password');
+        $credentials = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
 
-        if (Auth::guard('siswa')->attempt($credentials)) {
-            return redirect('/siswa/dashboard');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // ✅ setelah login sukses
+
+            $user = Auth::user();
+
+            if ($user->role === 'admin') {
+                return redirect('/admin/dashboard');
+            } elseif ($user->role === 'guru') {
+                return redirect('/guru/dashboard');
+            } else {
+                return redirect('/siswa/dashboard');
+            }
         }
 
-        return back()->with('error', 'NIS atau password salah');
+        return back()->with('error', 'Username atau password salah!');
     }
 
-
-    // ==========================
-    // LOGIN GURU
-    // ==========================
-    public function loginGuruPage()
+    public function logout()
     {
-        return view('auth.login_guru');
-    }
-
-    public function loginGuru(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::guard('guru')->attempt($credentials)) {
-            return redirect('/guru/dashboard');
-        }
-
-        return back()->with('error', 'Email atau password salah');
+        Auth::logout();
+        return redirect('/login');
     }
 }
