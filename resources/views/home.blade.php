@@ -13,7 +13,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -27,32 +27,43 @@
   <link href="assets/css/main.css" rel="stylesheet">
 
   <style>
-    /* Smooth scrolling untuk seluruh halaman */
+    * {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
-    /* Offset untuk fixed header */
     section {
       scroll-margin-top: 100px;
     }
 
-    /* Header Styling */
+    /* HEADER */
     #header .topbar {
       background-color: #5A9FB5 !important;
+      height: 3px;
     }
 
     #header .branding {
       background-color: #5A9FB5 !important;
+      padding: 18px 0;
     }
 
     #header .sitename {
       color: #ffffff !important;
+      font-size: 26px;
+      font-weight: 700;
     }
 
     #header .navmenu a {
       color: #ffffff !important;
       position: relative;
+      font-weight: 500;
+      font-size: 15px;
     }
 
     #header .navmenu a::after {
@@ -71,78 +82,118 @@
       width: 100%;
     }
 
-    #header .navmenu a:hover,
-    #header .navmenu a.active {
-      color: #ffffff !important;
-    }
-
-    /* Button Styling */
+    /* BUTTON */
     .btn-primary {
       background-color: #5A9FB5 !important;
-      border-color: #5A9FB5 !important;
+      border: none !important;
       color: #ffffff !important;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s ease;
+      padding: 14px 40px !important;
+      border-radius: 30px !important;
+      font-weight: 600 !important;
+      font-size: 15px !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 4px 15px rgba(90, 159, 181, 0.3) !important;
     }
 
     .btn-primary:hover {
-      background-color: #4A8FA5 !important;
-      border-color: #4A8FA5 !important;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(90, 159, 181, 0.3);
+      background-color: #4D869C !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 20px rgba(90, 159, 181, 0.4) !important;
     }
 
-    /* Scroll Top Button */
-    #scroll-top {
-      background-color: #5A9FB5 !important;
-      color: #ffffff !important;
+    /* HERO */
+    #hero {
+      background: linear-gradient(135deg, #CDE8E5 0%, #EEF7FF 100%);
+      padding: 140px 0 100px;
     }
 
-    #scroll-top:hover {
-      background-color: #4A8FA5 !important;
+    #hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: #2c3e50;
+      line-height: 1.2;
+      margin-bottom: 25px;
     }
+
+    #hero .highlight {
+      color: #5A9FB5 !important;
+    }
+
+    #hero .hero-description {
+      font-size: 18px;
+      color: #7AB2B2;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    #hero .main-image img {
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(90, 159, 181, 0.2);
+    }
+
+    /* TENTANG KAMI */
+    #tentang-kami {
+      padding: 120px 0;
+      background-color: #ffffff;
+    }
+
+    #tentang-kami .section-heading {
+      font-size: 42px;
+      font-weight: 700;
+      color: #5A9FB5;
+      margin-bottom: 25px;
+    }
+
+    #tentang-kami p {
+      font-size: 17px;
+      color: #7AB2B2;
+      line-height: 1.9;
+    }
+
+    #tentang-kami .about-visual img {
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(90, 159, 181, 0.15);
+    }
+
+    /* GURU SECTION */
     #guru {
-      background-color: #CDE8E5;
-      padding: 80px 0;
+      background: linear-gradient(135deg, #EEF7FF 0%, #CDE8E5 100%);
+      padding: 120px 0;
     }
 
     #guru .section-title h2 {
-      font-size: 36px;
+      font-size: 42px;
       font-weight: 700;
       color: #5A9FB5;
       margin-bottom: 15px;
     }
 
     #guru .section-title p {
-      font-size: 16px;
-      color: #5A9FB5;
+      font-size: 17px;
+      color: #7AB2B2;
+      margin-bottom: 70px;
     }
 
-    /* Doctor/Guru Card Styling */
     .doctor-card {
       background: #ffffff;
-      border-radius: 20px;
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 5px 25px rgba(90, 159, 181, 0.15);
-      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px rgba(90, 159, 181, 0.12);
+      transition: all 0.4s ease;
       height: 100%;
-      display: flex;
-      flex-direction: column;
     }
 
     .doctor-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(90, 159, 181, 0.25);
+      box-shadow: 0 20px 50px rgba(90, 159, 181, 0.25);
     }
 
     .doctor-image {
       position: relative;
       width: 100%;
-      padding-top: 100%; /* Aspect ratio 1:1 untuk foto bulat sempurna */
+      padding-top: 100%;
       overflow: hidden;
-      background: #EEF7FF;
+      background: linear-gradient(135deg, #CDE8E5 0%, #EEF7FF 100%);
     }
 
     .doctor-image img {
@@ -150,105 +201,80 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 85%;
-      height: 85%;
+      width: 65%;
+      height: 65%;
       object-fit: cover;
       border-radius: 50%;
-      border: 8px solid #ffffff;
-      transition: all 0.3s ease;
+      border: 5px solid #ffffff;
+      box-shadow: 0 8px 25px rgba(90, 159, 181, 0.15);
+      transition: all 0.4s ease;
     }
 
     .doctor-card:hover .doctor-image img {
-      transform: translate(-50%, -50%) scale(1.05);
-      border-color: #CDE8E5;
+      transform: translate(-50%, -50%) scale(1.1);
     }
 
     .doctor-content {
       padding: 30px 25px;
       text-align: center;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
     }
 
     .doctor-content h4 {
-      font-size: 20px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 600;
       color: #5A9FB5;
-      margin-bottom: 8px;
-      line-height: 1.3;
+      margin-bottom: 12px;
+      line-height: 1.4;
     }
 
     .doctor-content .specialty {
       display: inline-block;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      background: #5A9FB5;
-      padding: 6px 20px;
-      border-radius: 20px;
-      margin-top: 5px;
+      background: linear-gradient(135deg, #5A9FB5 0%, #7AB2B2 100%);
+      padding: 8px 24px;
+      border-radius: 25px;
+      box-shadow: 0 4px 15px rgba(90, 159, 181, 0.25);
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 991px) {
-      .doctor-card {
-        margin-bottom: 30px;
-      }
-    }
-
-    @media (max-width: 767px) {
-      #guru {
-        padding: 60px 0;
-      }
-
-      #guru .section-title h2 {
-        font-size: 28px;
-      }
-
-      .doctor-content h4 {
-        font-size: 18px;
-      }
-    }
-
-    /* Contact Section Styling */
+    /* CONTACT */
     #contact {
-      padding: 80px 0;
+      padding: 120px 0;
       background-color: #ffffff;
     }
 
     #contact .section-title h2 {
-      font-size: 36px;
+      font-size: 42px;
       font-weight: 700;
       color: #5A9FB5;
       margin-bottom: 15px;
     }
 
     #contact .section-title p {
-      font-size: 16px;
+      font-size: 17px;
       color: #7AB2B2;
+      margin-bottom: 70px;
     }
 
     .info-item {
       background: #ffffff;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(90, 159, 181, 0.1);
+      padding: 45px 35px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(90, 159, 181, 0.12);
       height: 100%;
-      transition: all 0.3s ease;
-      border: 2px solid #CDE8E5;
+      transition: all 0.4s ease;
+      border: 2px solid #EEF7FF;
     }
 
     .info-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(90, 159, 181, 0.2);
-      background: #EEF7FF;
-      border-color: #7AB2B2;
+      transform: translateY(-8px);
+      box-shadow: 0 15px 45px rgba(90, 159, 181, 0.2);
+      border-color: #CDE8E5;
     }
 
     .info-item i {
-      font-size: 40px;
+      font-size: 42px;
       color: #5A9FB5;
       margin-bottom: 20px;
     }
@@ -262,32 +288,142 @@
 
     .info-item p {
       font-size: 15px;
-      color: #5A9FB5;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Hero Section Custom */
-    #hero {
-      background: linear-gradient(135deg, #CDE8E5 0%, #EEF7FF 100%);
-    }
-
-    #hero .highlight {
-      color: #5A9FB5 !important;
-    }
-
-    /* Tentang Kami Section */
-    #tentang-kami {
-      background-color: #ffffff;
-    }
-
-    #tentang-kami .section-heading {
-      color: #5A9FB5;
-    }
-
-    #tentang-kami p {
       color: #7AB2B2;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    #footer {
+      background: linear-gradient(135deg, #5A9FB5 0%, #4D869C 100%);
+      color: #ffffff;
+      padding: 80px 0 30px;
+    }
+
+    #footer .sitename {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    #footer .brand-description {
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
       line-height: 1.8;
+    }
+
+    #footer .contact-item {
+      display: flex;
+      align-items: start;
+      gap: 15px;
+      margin-bottom: 18px;
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+    }
+
+    #footer .contact-item i {
+      color: #CDE8E5;
+      font-size: 20px;
+      margin-top: 3px;
+    }
+
+    #footer .nav-column h6 {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    #footer .footer-nav a {
+      display: block;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 15px;
+      margin-bottom: 14px;
+      transition: all 0.3s ease;
+    }
+
+    #footer .footer-nav a:hover {
+      color: #CDE8E5;
+      padding-left: 10px;
+    }
+
+    #footer .footer-bottom {
+      background: rgba(0,0,0,0.15);
+      padding: 25px 0;
+      margin-top: 60px;
+    }
+
+    #footer .footer-bottom p {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    #footer .legal-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 25px;
+      transition: color 0.3s ease;
+    }
+
+    #footer .legal-links a:hover {
+      color: #CDE8E5;
+    }
+
+    /* SCROLL TOP */
+    #scroll-top {
+      background-color: #5A9FB5 !important;
+      color: #ffffff !important;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      box-shadow: 0 6px 20px rgba(90, 159, 181, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    #scroll-top:hover {
+      background-color: #4D869C !important;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(90, 159, 181, 0.45);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 991px) {
+      #hero h1 {
+        font-size: 40px;
+      }
+
+      #guru .section-title h2,
+      #contact .section-title h2,
+      #tentang-kami .section-heading {
+        font-size: 36px;
+      }
+
+      .doctor-card {
+        margin-bottom: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      #hero {
+        padding: 120px 0 80px;
+      }
+
+      #hero h1 {
+        font-size: 32px;
+      }
+
+      #guru,
+      #contact,
+      #tentang-kami {
+        padding: 80px 0;
+      }
+
+      .doctor-content h4 {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -296,7 +432,7 @@
 
   <!-- HEADER -->
   <header id="header" class="header fixed-top">
-    <div class="topbar d-flex align-items-center dark-background"></div>
+    <div class="topbar d-flex align-items-center"></div>
 
     <div class="branding d-flex align-items-center">
       <div class="container position-relative d-flex align-items-center justify-content-between">
@@ -353,22 +489,19 @@
       </div>
     </section>
 
-    <!-- HOME ABOUT / TENTANG KAMI -->
+    <!-- TENTANG KAMI -->
     <section id="tentang-kami" class="home-about section">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row align-items-center">
 
           <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
             <div class="about-content">
-
               <h2 class="section-heading">Tentang Kami</h2>
-
               <p>
                 Bimbingan Konseling SMKN 11 Bandung kini hadir dalam bentuk layanan digital untuk meningkatkan efektivitas dan keterjangkauan pelayanan. 
                 Sistem ini mempermudah proses konsultasi, pencatatan kasus, penjadwalan, serta komunikasi antara siswa dan guru BK.
                 Kami berupaya memberikan layanan terbaik demi mendukung proses pembinaan, pengembangan karakter, serta penyelesaian permasalahan siswa secara profesional.
               </p>
-
             </div>
           </div>
 
@@ -386,7 +519,7 @@
     <section id="guru" class="section">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-title text-center mb-5">
+        <div class="section-title text-center">
           <h2>Guru Bimbingan Konseling</h2>
           <p>Tim profesional yang siap membantu Anda</p>
         </div>
@@ -397,7 +530,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/bu_suci.jpg" class="img-fluid" alt="Suci Nur Fitriyanti">
+                <img src="assets/img/pas_foto_ibu_ameliya.png" class="img-fluid" alt="Suci Nur Fitriyanti">
               </div>
               <div class="doctor-content">
                 <h4>Suci Nur Fitriyanti, S.Pd</h4>
@@ -410,10 +543,23 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="200">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/bu_evi.png" class="img-fluid" alt="Evi Febry Damayanti">
+                <img src="assets/img/pas_foto_ibu_evi.png" class="img-fluid" alt="Evi Febry Damayanti">
               </div>
               <div class="doctor-content">
                 <h4>Evi Febry Damayanti, S.Pd</h4>
+                <span class="specialty">Guru BK</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="doctor-card">
+              <div class="doctor-image">
+                <img src="assets/img/pas_foto_ibu_wening.png" class="img-fluid" alt="Wening Wigati">
+              </div>
+              <div class="doctor-content">
+                <h4>Dra. Wening Wigati, SE, M.Si</h4>
                 <span class="specialty">Guru BK</span>
               </div>
             </div>
@@ -423,20 +569,7 @@
           <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="400">
             <div class="doctor-card">
               <div class="doctor-image">
-                <img src="assets/img/bu_wening.jpg" class="img-fluid" alt="Wening Wigati">
-              </div>
-              <div class="doctor-content">
-                <h4>Dra. Wening Wigati, SE, M.Si</h4>
-                <span class="specialty">Guru BK</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 5 -->
-          <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="doctor-card">
-              <div class="doctor-image">
-                <img src="assets/img/bu_amelia.png" class="img-fluid" alt="Ameliya Purnama Putri">
+                <img src="assets/img/pas_foto_ibu_ameliya.png" class="img-fluid" alt="Ameliya Purnama Putri">
               </div>
               <div class="doctor-content">
                 <h4>Rr. Ameliya Purnama Putri, S.Pd</h4>
@@ -454,7 +587,7 @@
     <section id="contact" class="section">
       <div class="container" data-aos="fade-up">
         
-        <div class="section-title text-center mb-5">
+        <div class="section-title text-center">
           <h2>Hubungi Kami</h2>
           <p>Kami siap membantu Anda</p>
         </div>
@@ -512,7 +645,7 @@
               <div class="contact-info mt-5">
                 <div class="contact-item">
                   <i class="bi bi-geo-alt"></i>
-                  <span>Alamat: Jl. Raya Cilember, RT.01/RW.04, Sukaraja, Cicendo, Bandung, Jawa Barat 40153</span>
+                  <span>Jl. Raya Cilember, RT.01/RW.04, Sukaraja, Cicendo, Bandung, Jawa Barat 40153</span>
                 </div>
 
                 <div class="contact-item">
