@@ -15,8 +15,8 @@ class Konseling extends Model
     protected $fillable = [
         'id_siswa',
         'id_guru',
-        'topik',
-        'deskripsi',
+        'masalah',
+        'solusi',
         'tanggal',
         'status'
     ];

@@ -18,13 +18,13 @@ class KonselingController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'deskripsi' => 'required',
+            'solusi' => 'required',
         ]);
 
         Konseling::create([
             'id_siswa' => Auth::guard('siswa')->id(),
             'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
+            'solusi' => $request->solusi,
             'status' => 'Proses',
         ]);
 

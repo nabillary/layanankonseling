@@ -28,16 +28,33 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
 // LOGOUT
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-// ========================
-// SISWA
-// ========================
-Route::middleware(['auth', 'role:siswa'])->group(function () {
-    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard']);
-    Route::get('/siswa/konseling/ajukan', [KonselingController::class, 'create']);
-    Route::post('/siswa/konseling/store', [KonselingController::class, 'store']);
-    Route::get('/siswa/riwayat', [RiwayatController::class, 'index']);
-    Route::get('/siswa/riwayat/{id}', [RiwayatController::class, 'show']);
-});
+
+    // DASHBOARD
+    Route::get('/dashboard', [SiswaController::class, 'dashboard'])
+        ->name('dashboard');
+
+    // AJUKAN KONSELING ✅ (INI YANG TADI KEHAPUS)
+    Route::get('/konseling/ajukan', [KonselingController::class, 'create'])
+        ->name('konseling.ajukan');
+
+    Route::post('/konseling/store', [KonselingController::class, 'store'])
+        ->name('konseling.store');
+
+// RIWAYAT SISWA
+Route::get('/riwayat', [RiwayatController::class, 'indexSiswa'])
+    ->name('riwayat.index');
+
+Route::get('/riwayat/{id}', [RiwayatController::class, 'showSiswa'])
+    ->name('riwayat.detail');
+
+    // PROFIL
+    Route::get('/profil', [SiswaController::class, 'profil'])
+        ->name('profil');
+
+    Route::post('/profil/update', [SiswaController::class, 'updateProfil'])
+        ->name('profil.update');
+
+
 
 
 // ========================
