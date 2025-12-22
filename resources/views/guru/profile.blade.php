@@ -33,17 +33,12 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold text-secondary">Nama Lengkap</label>
-                    <input type="text" class="form-control" name="nama" value="{{ $guru->nama }}" required>
+                    <input type="text" class="form-control" name="nama" value="{{ $guru->nama }}" disabled>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-semibold text-secondary">NIP</label>
                     <input type="text" class="form-control" value="{{ $guru->nip }}" disabled>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label fw-semibold text-secondary">Password Baru</label>
-                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak diganti">
                 </div>
 
                 <div class="text-end">

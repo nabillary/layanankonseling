@@ -30,7 +30,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // DASHBOARD
-    Route::get('/dashboard', [SiswaController::class, 'dashboard'])
+    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])
         ->name('dashboard');
 
     // AJUKAN KONSELING ✅ (INI YANG TADI KEHAPUS)
@@ -75,26 +75,59 @@ Route::middleware(['auth', 'role:guru'])->group(function () {
 // ADMIN
 // ========================
 Route::middleware(['auth', 'role:admin'])->group(function () {
-   Route::get('/admin/dashboard', [DashboardController::class, 'index'])
+
+    // DASHBOARD
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])
         ->name('admin.dashboard');
-    
-    // Konseling (READ ONLY)
-    Route::get('/admin/konseling', [AdminKonselingController::class, 'index']);
-    Route::get('/admin/konseling/{id}', [AdminKonselingController::class, 'show']);
 
+    // ======================
+    // KONSELING (READ ONLY)
+    // ======================
+    Route::get('/admin/konseling', [AdminKonselingController::class, 'index'])
+        ->name('admin.konseling.index');
+
+    Route::get('/admin/konseling/{id}', [AdminKonselingController::class, 'show'])
+        ->name('admin.konseling.show');
+
+    // ======================
     // CRUD SISWA
-    Route::get('/admin/siswa', [AdminSiswaController::class, 'index']);
-    Route::get('/admin/siswa/create', [AdminSiswaController::class, 'create']);
-    Route::post('/admin/siswa', [AdminSiswaController::class, 'store']);
-    Route::get('/admin/siswa/{id}/edit', [AdminSiswaController::class, 'edit']);
-    Route::put('/admin/siswa/{id}', [AdminSiswaController::class, 'update']);
-    Route::delete('/admin/siswa/{id}', [AdminSiswaController::class, 'destroy']);
+    // ======================
+    Route::get('/admin/siswa', [AdminSiswaController::class, 'index'])
+        ->name('admin.siswa.index');
 
+    Route::get('/admin/siswa/create', [AdminSiswaController::class, 'create'])
+        ->name('admin.siswa.create');
+
+    Route::post('/admin/siswa', [AdminSiswaController::class, 'store'])
+        ->name('admin.siswa.store');
+
+    Route::get('/admin/siswa/{id}/edit', [AdminSiswaController::class, 'edit'])
+        ->name('admin.siswa.edit');
+
+    Route::put('/admin/siswa/{id}', [AdminSiswaController::class, 'update'])
+        ->name('admin.siswa.update');
+
+    Route::delete('/admin/siswa/{id}', [AdminSiswaController::class, 'destroy'])
+        ->name('admin.siswa.destroy');
+
+    // ======================
     // CRUD GURU
-    Route::get('/admin/guru', [AdminGuruController::class, 'index']);
-    Route::get('/admin/guru/create', [AdminGuruController::class, 'create']);
-    Route::post('/admin/guru', [AdminGuruController::class, 'store']);
-    Route::get('/admin/guru/{id}/edit', [AdminGuruController::class, 'edit']);
-    Route::put('/admin/guru/{id}', [AdminGuruController::class, 'update']);
-    Route::delete('/admin/guru/{id}', [AdminGuruController::class, 'destroy']);
+    // ======================
+    Route::get('/admin/guru', [AdminGuruController::class, 'index'])
+        ->name('admin.guru.index');
+
+    Route::get('/admin/guru/create', [AdminGuruController::class, 'create'])
+        ->name('admin.guru.create');
+
+    Route::post('/admin/guru', [AdminGuruController::class, 'store'])
+        ->name('admin.guru.store');
+
+    Route::get('/admin/guru/{id}/edit', [AdminGuruController::class, 'edit'])
+        ->name('admin.guru.edit');
+
+    Route::put('/admin/guru/{id}', [AdminGuruController::class, 'update'])
+        ->name('admin.guru.update');
+
+    Route::delete('/admin/guru/{id}', [AdminGuruController::class, 'destroy'])
+        ->name('admin.guru.destroy');
 });

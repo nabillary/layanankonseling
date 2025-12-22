@@ -4,7 +4,18 @@
 <div class="container">
     <h4>Tambah Siswa</h4>
 
-    <form action="/admin/siswa" method="POST">
+    {{-- ALERT ERROR --}}
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="/admin/siswa" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -18,8 +29,24 @@
         </div>
 
         <div class="mb-3">
+            <label>Kelas</label>
+            <input type="text" name="kelas" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Jurusan</label>
+            <input type="text" name="jurusan" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
             <label>Password</label>
             <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Foto</label>
+            <input type="file" name="foto" class="form-control">
+            <small class="text-muted">Opsional (jpg, png)</small>
         </div>
 
         <button class="btn btn-primary">Simpan</button>

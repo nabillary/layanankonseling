@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 class GuruController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $guru = Guru::latest()->get();
+        $q = $request->q;
+
+        $guru = Guru::when($q, function ($query) use ($q) {
+            $query->where('nama', 'like', "%$q%")
+                  ->orWhere('nip', 'like', "%$q%");
+        })->get();
+
         return view('admin.guru.index', compact('guru'));
     }
 
@@ -23,18 +29,27 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nip' => 'required|unique:guru',
-            'nama' => 'required',
-            'password' => 'required|min:6'
+            'nip'   => 'nullable|string|max:20',
+            'nama'  => 'required|string|max:100',
+            'password' => 'required|min:6',
+            'foto'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        Guru::create([
-            'nip' => $request->nip,
-            'nama' => $request->nama,
-            'password' => Hash::make($request->password),
-        ]);
+        $data = $request->only('nip', 'nama');
+        $data['password'] = Hash::make($request->password);
 
-        return redirect('/admin/guru')->with('success', 'Data guru ditambahkan');
+        if ($request->hasFile('foto')) {
+            $file = $request->foto;
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/guru'), $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        Guru::create($data);
+
+        return redirect()
+            ->route('admin.guru.index')
+            ->with('success', 'Data guru berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -47,17 +62,49 @@ class GuruController extends Controller
     {
         $guru = Guru::findOrFail($id);
 
-        $guru->update([
-            'nip' => $request->nip,
-            'nama' => $request->nama,
+        $request->validate([
+            'nip'   => 'nullable|string|max:20',
+            'nama'  => 'required|string|max:100',
+            'password' => 'nullable|min:6',
+            'foto'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        return redirect('/admin/guru')->with('success', 'Data guru diperbarui');
+        $data = $request->only('nip', 'nama');
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        if ($request->hasFile('foto')) {
+            if ($guru->foto && file_exists(public_path('uploads/guru/' . $guru->foto))) {
+                unlink(public_path('uploads/guru/' . $guru->foto));
+            }
+
+            $file = $request->foto;
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/guru'), $namaFile);
+            $data['foto'] = $namaFile;
+        }
+
+        $guru->update($data);
+
+        return redirect()
+            ->route('admin.guru.index')
+            ->with('success', 'Data guru berhasil diperbarui');
     }
 
     public function destroy($id)
     {
-        Guru::findOrFail($id)->delete();
-        return back()->with('success', 'Data guru dihapus');
+        $guru = Guru::findOrFail($id);
+
+        if ($guru->foto && file_exists(public_path('uploads/guru/' . $guru->foto))) {
+            unlink(public_path('uploads/guru/' . $guru->foto));
+        }
+
+        $guru->delete();
+
+        return redirect()
+            ->route('admin.guru.index')
+            ->with('success', 'Data guru berhasil dihapus');
     }
 }

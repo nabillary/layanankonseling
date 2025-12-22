@@ -4,7 +4,7 @@
 <div class="container">
     <h4>Edit Siswa</h4>
 
-    <form action="/admin/siswa/{{ $siswa->id }}" method="POST">
+    <form action="/admin/siswa/{{ $siswa->id_siswa }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -22,8 +22,38 @@
                    class="form-control" required>
         </div>
 
-        <button class="btn btn-primary">Update</button>
-        <a href="/admin/siswa" class="btn btn-secondary">Kembali</a>
+        <div class="mb-3">
+            <label>Kelas</label>
+            <input type="text" name="kelas"
+                   value="{{ $siswa->kelas }}"
+                   class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Jurusan</label>
+            <input type="text" name="jurusan"
+                   value="{{ $siswa->jurusan }}"
+                   class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label>Foto</label>
+            <input type="file" name="foto" class="form-control">
+
+            @if($siswa->foto)
+                <div class="mt-2">
+                    <img src="{{ asset('uploads/siswa/'.$siswa->foto) }}"
+                        width="100"
+                        class="img-thumbnail">
+                </div>
+            @endif
+        </div>
+
+
+        <div class="mt-3">
+            <button class="btn btn-primary">Update</button>
+            <a href="/admin/siswa" class="btn btn-secondary">Kembali</a>
+        </div>
     </form>
 </div>
 @endsection
