@@ -398,9 +398,13 @@
                         <div class="user-role">Siswa SMKN 11 Bandung</div>
                     </div>
                 </div>
-                <a href="#" class="btn-logout">
-                    <i class="bi bi-box-arrow-right me-2"></i>Logout
-                </a>
+               <form action="{{ route('logout') }}" method="POST" class="d-inline">
+    @csrf
+    <button class="dropdown-item text-danger">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+</form>
+
             </div>
         </div>
         

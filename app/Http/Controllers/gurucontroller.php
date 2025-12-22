@@ -1,45 +1,97 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+
 use App\Models\Konseling;
 use App\Models\Guru;
-use Illuminate\Support\Facades\DB; 
+use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
+    // ================= DASHBOARD =================
     public function dashboard()
-    {
-        return view('guru.dashboard', [
-            'title'     => 'Dashboard Guru',
-            'menunggu'  => Konseling::where('status', 'Menunggu')->count(),
-            'proses'    => Konseling::where('status', 'Diproses')->count(),
-            'selesai'   => Konseling::where('status', 'Selesai')->count(),
-            'latest'    => Konseling::orderBy('id_konseling', 'desc')->limit(5)->get(),
-        ]);
-    }
-    public function index()
-    {
-        $konseling = DB::table('konseling')
-            ->orderBy('id_konseling', 'desc')
-            ->get();
+{
+    return view('guru.dashboard', [
+        'menunggu' => Konseling::where('status', 'terjadwal')->count(),
+        'proses'   => 0, // belum dipakai
+        'selesai'  => Konseling::where('status', 'selesai')->count(),
+        'latest'   => Konseling::with('siswa')
+                        ->orderByDesc('id_konseling')
+                        ->limit(5)
+                        ->get(),
+    ]);
+}
 
-        return view('guru.konseling.index', [
-            'konseling' => $konseling
-        ]);
-    }
-    public function profil()
-    {
-        //ini nnti diganti ini ko $guru = Auth::guard('guru')->user();
-        $guru = \App\Models\Guru::first(); 
-        return view('guru.profile', [
-            'title' => 'Profil Guru',
-            'guru'  => $guru
-        ]);
+
+    // ================= KONSELING MASUK =================
+ public function index()
+{
+    $konseling = Konseling::with('siswa')
+        ->where('status', 'terjadwal')
+        ->orderByDesc('id_konseling')
+        ->get();
+
+    return view('guru.konseling.index', compact('konseling'));
+}
+
+
+    // ================= DETAIL =================
+ public function show($id)
+{
+    $konseling = Konseling::with('siswa')->findOrFail($id);
+    return view('guru.konseling.show', compact('konseling'));
+}
+
+
+    // ================= SOLUSI =================
+public function solusi(Request $request, $id)
+{
+    $request->validate([
+        'solusi' => 'required'
+    ]);
+
+    $konseling = Konseling::findOrFail($id);
+    $konseling->update([
+        'solusi' => $request->solusi,
+        'status' => 'selesai'
+    ]);
+
+    return redirect('/guru/riwayat')->with('success', 'Solusi berhasil dikirim');
+}
+
+    // ================= RIWAYAT =================
+public function riwayat()
+{
+    $riwayat = Konseling::with('siswa')
+        ->orderByDesc('id_konseling')
+        ->get(); // ⬅️ AMBIL SEMUANYA, TANPA FILTER STATUS
+
+    return view('guru.riwayat.index', compact('riwayat'));
+}
+
+
+
+
+
+    /* ======================
+     * PROFIL
+     * ====================== */
+  public function profil()
+{
+    $guru = Guru::first();
+
+    if (!$guru) {
+        return redirect()->back()->with('error', 'Data guru belum ada di database');
     }
 
-    // UPDATE PROFIL
+    return view('guru.profile', [
+        'title' => 'Profil Guru',
+        'guru'  => $guru
+    ]);
+}
+
+
+     // UPDATE PROFIL
     public function updateProfil(Request $request)
     {
         $guru = Guru::find($request->id_guru);
@@ -67,4 +119,5 @@ class GuruController extends Controller
 
         return back()->with('success', 'Profil berhasil diperbarui!');
     }
+
 }

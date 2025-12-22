@@ -11,7 +11,8 @@ class Konseling extends Model
 
     protected $table = 'konseling';
     protected $primaryKey = 'id_konseling';
-    
+    public $timestamps = false;
+
     protected $fillable = [
         'id_siswa',
         'id_guru',
@@ -21,17 +22,11 @@ class Konseling extends Model
         'status'
     ];
 
-    // ================================
-    // RELATIONSHIP
-    // ================================
-    
-    // Konseling milik seorang siswa
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'id_siswa', 'id_siswa');
     }
 
-    // Konseling ditangani oleh seorang guru BK
     public function guru()
     {
         return $this->belongsTo(Guru::class, 'id_guru', 'id_guru');

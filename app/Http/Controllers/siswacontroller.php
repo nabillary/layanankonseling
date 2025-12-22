@@ -26,6 +26,9 @@ class SiswaController extends Controller
         ));
     }
 
+
+
+
     // PROFIL
     public function profil()
     {
@@ -51,22 +54,19 @@ class SiswaController extends Controller
             $siswa->password = Hash::make($request->password);
         }
 
-      // UPLOAD FOTO
-if ($request->hasFile('foto')) {
-    $file = $request->file('foto');
-    $namaFile = time().'_'.$file->getClientOriginalName();
+         // update foto (kalau upload)
+    if ($request->hasFile('foto')) {
+        $file = $request->file('foto');
+        $namaFile = time().'_'.$file->getClientOriginalName();
 
-    // SIMPAN KE public/assets/img
-    $file->move(public_path('assets/img'), $namaFile);
-
-    $siswa->foto = $namaFile;
-}
-
-
-        $siswa->save();
-
-        return redirect()
-            ->route('siswa.profil')
-            ->with('success', 'Profil berhasil diperbarui');
+        $file->move(public_path('assets/img'), $namaFile);
+        $siswa->foto = $namaFile;
     }
+
+    $siswa->save();
+
+    return redirect()
+        ->route('siswa.profil')
+        ->with('success', 'Profil berhasil diperbarui');
+}
 }

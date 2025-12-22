@@ -28,8 +28,10 @@ class AuthController extends Controller
                 return redirect('/admin/dashboard');
             } elseif ($user->role === 'guru') {
                 return redirect('/guru/dashboard');
+            }elseif ($user->role === 'siswa') {
+            return redirect('/siswa/dashboard'); // ⬅️ INI PENTING
             } else {
-                return redirect('/siswa/dashboard');
+                return redirect('/dashboard');
             }
         }
 

@@ -8,24 +8,24 @@ use Illuminate\Http\Request;
 
 class RiwayatController extends Controller
 {
-    // ============================
+     // ============================
     // SISWA - RIWAYAT
     // ============================
-    public function indexSiswa()
-    {
-        $riwayat = Konseling::where('id_siswa', Auth::guard('siswa')->id())
-            ->where('status', 'Selesai')
-            ->orderBy('tanggal', 'desc')
-            ->get();
+public function indexSiswa()
+{
+    // 🔥 sementara ambil siswa pertama
+    $siswa = \App\Models\Siswa::first();
 
-        return view('siswa.riwayat.index', compact('riwayat'));
+    if (!$siswa) {
+        abort(404, 'Data siswa belum ada');
     }
 
-    public function showSiswa($id)
-    {
-        $data = Konseling::findOrFail($id);
-        return view('siswa.riwayat.detail', compact('data'));
-    }
+    $riwayat = Konseling::where('id_siswa', $siswa->id_siswa)
+        ->orderByDesc('tanggal')
+        ->get();
+
+    return view('siswa.riwayat.index', compact('riwayat'));
+}
 
 
     // ============================
@@ -33,9 +33,9 @@ class RiwayatController extends Controller
     // ============================
     public function indexGuru()
     {
-        $riwayat = Konseling::where('id_guru', Auth::guard('guru')->id())
-            ->where('status', 'Selesai')
-            ->orderBy('tanggal', 'desc')
+        $riwayat = Konseling::with('siswa')
+            
+            ->orderBy('id_konseling', 'desc')
             ->get();
 
         return view('guru.riwayat.index', compact('riwayat'));
@@ -43,7 +43,7 @@ class RiwayatController extends Controller
 
     public function showGuru($id)
     {
-        $data = Konseling::findOrFail($id);
-        return view('guru.riwayat.detail', compact('data'));
+        $konseling = Konseling::with('siswa')->findOrFail($id);
+        return view('guru.riwayat.show', compact('konseling'));
     }
 }
