@@ -29,43 +29,49 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 // LOGOUT
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // DASHBOARD
-    Route::get('/siswa/dashboard', [SiswaController::class, 'dashboard'])
-        ->name('dashboard');
 
-    // AJUKAN KONSELING ✅ (INI YANG TADI KEHAPUS)
-    Route::get('/konseling/ajukan', [KonselingController::class, 'create'])
-        ->name('konseling.ajukan');
+Route::prefix('siswa')
+    ->name('siswa.')
+   
+    ->group(function () {
 
-    Route::post('/konseling/store', [KonselingController::class, 'store'])
-        ->name('konseling.store');
+        Route::get('/dashboard', [SiswaController::class, 'dashboard'])
+            ->name('dashboard');
 
-// RIWAYAT SISWA
-Route::get('/riwayat', [RiwayatController::class, 'indexSiswa'])
-    ->name('riwayat.index');
+        Route::get('/konseling/ajukan', [KonselingController::class, 'create'])
+            ->name('konseling.ajukan');
 
-Route::get('/riwayat/{id}', [RiwayatController::class, 'showSiswa'])
-    ->name('riwayat.detail');
+        Route::post('/konseling/store', [KonselingController::class, 'store'])
+            ->name('konseling.store');
 
-    // PROFIL
-    Route::get('/profil', [SiswaController::class, 'profil'])
-        ->name('profil');
+        Route::get('/riwayat', [RiwayatController::class, 'indexSiswa'])
+            ->name('riwayat.index');
 
-    Route::post('/profil/update', [SiswaController::class, 'updateProfil'])
-        ->name('profil.update');
+        Route::get('/riwayat/{id}', [RiwayatController::class, 'showSiswa'])
+            ->name('riwayat.detail');
 
+        Route::get('/profil', [SiswaController::class, 'profil'])
+            ->name('profil');
 
-
+        Route::post('/profil/update', [SiswaController::class, 'updateProfil'])
+            ->name('profil.update');
+    });
 
 // ========================
-// GURU
+// GURU (PAKAI AUTH)
 // ========================
 Route::middleware(['auth', 'role:guru'])->group(function () {
+
     Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
-    Route::get('/guru/konseling', [KonselingController::class, 'index']);
-    Route::get('/guru/konseling/{id}', [KonselingController::class, 'show']);
+
+    Route::get('/guru/konseling', [GuruController::class, 'index']);
+    Route::get('/guru/konseling/{id}', [GuruController::class, 'show']);
+
     Route::get('/guru/riwayat', [RiwayatController::class, 'indexGuru']);
     Route::get('/guru/riwayat/{id}', [RiwayatController::class, 'showGuru']);
+
+    Route::post('/guru/konseling/{id}/solusi', [GuruController::class, 'solusi']);
+    Route::post('/guru/konseling/{id}/batal', [KonselingController::class, 'batal'])->name('guru.konseling.batal');
     Route::get('/guru/profil', [GuruController::class, 'profil']);
     Route::post('/guru/profil/update', [GuruController::class, 'updateProfil']);
 });

@@ -8,55 +8,85 @@ use Illuminate\Support\Facades\Auth;
 
 class KonselingController extends Controller
 {
-    // SISWA - FORM AJUKAN
+    // =================================================
+    // SISWA - FORM AJUKAN KONSELING
+    // =================================================
     public function create()
     {
         return view('siswa.konseling.ajukan');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'judul' => 'required',
-            'solusi' => 'required',
-        ]);
+    // =================================================
+    // SISWA - SIMPAN KONSELING
+    // =================================================
+// SIMPAN KONSELING
+public function store(Request $request)
+{
+    $request->validate([
+        'masalah' => 'required|string'
+    ]);
 
-        Konseling::create([
-            'id_siswa' => Auth::guard('siswa')->id(),
-            'judul' => $request->judul,
-            'solusi' => $request->solusi,
-            'status' => 'Proses',
-        ]);
+    Konseling::create([
+        'id_siswa' => Auth::user()->id,
+        'masalah'  => $request->masalah,
+        'status'   => 'terjadwal', // 🔥 HARUS SAMA ENUM
+        'tanggal'  => now()->toDateString(),
+    ]);
 
-        return redirect('/siswa/dashboard')->with('success', 'Pengajuan konseling berhasil dikirim');
-    }
+    return redirect()
+        ->route('siswa.dashboard')
+        ->with('success', 'Konseling berhasil diajukan');
+}
 
-
+    // =================================================
     // GURU - LIST KONSELING MASUK
+    // =================================================
     public function index()
     {
-        $data = Konseling::latest()->get();
+        $data = Konseling::with('siswa')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
         return view('guru.konseling.index', compact('data'));
     }
 
+    // =================================================
+    // GURU - DETAIL KONSELING
+    // =================================================
     public function show($id)
     {
-        $data = Konseling::findOrFail($id);
+        $data = Konseling::with('siswa')->findOrFail($id);
         return view('guru.konseling.detail', compact('data'));
     }
 
+    // =================================================
+    // GURU - KIRIM SOLUSI
+    // =================================================
     public function solusi(Request $request, $id)
     {
         $request->validate([
-            'solusi' => 'required'
+            'solusi' => 'required|string'
         ]);
 
-        $data = Konseling::findOrFail($id);
-        $data->update([
+        $konseling = Konseling::findOrFail($id);
+
+        $konseling->update([
             'solusi' => $request->solusi,
             'status' => 'Selesai'
         ]);
 
-        return redirect('/guru/konseling')->with('success', 'Solusi berhasil dikirim');
+        return redirect('/guru/konseling')
+            ->with('success', 'Solusi berhasil dikirim');
+    }
+    public function batal($id)
+    {
+        $konseling = Konseling::findOrFail($id);
+
+        $konseling->update([
+            'status' => 'batal'
+        ]);
+
+        return redirect('/guru/konseling')
+            ->with('success', 'Konseling berhasil ditolak');
     }
 }

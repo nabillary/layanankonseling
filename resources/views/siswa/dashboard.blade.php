@@ -21,41 +21,6 @@
 </div>
 @endif
 
-{{-- ================= RINGKASAN ================= --}}
-<div class="row g-3">
-
-    <div class="col-md-6">
-        <div class="stat-card">
-            <h6>Masalah Terakhir</h6>
-            <h4>
-                {{ $lastKonseling->masalah ?? 'Belum ada konseling' }}
-            </h4>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="stat-card">
-            <h6>Status</h6>
-            <span class="badge bg-{{ 
-                $lastKonseling?->status == 'Menunggu' ? 'warning' :
-                ($lastKonseling?->status == 'Diproses' ? 'primary' : 'success')
-            }}">
-                {{ $lastKonseling->status ?? '-' }}
-            </span>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="stat-card">
-            <h6>Jadwal</h6>
-            <h5>
-                {{ $lastKonseling?->tanggal ?? '-' }}
-            </h5>
-        </div>
-    </div>
-
-</div>
-
 {{-- ================= AKSI ================= --}}
 <div class="mt-5 d-flex gap-3">
 

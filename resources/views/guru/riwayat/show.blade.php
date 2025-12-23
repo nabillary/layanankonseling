@@ -16,8 +16,10 @@
     </div>
 
     <div class="mb-3">
-        <strong>Deskripsi Konseling:</strong>
-        <p>{{ $riwayat->deskripsi }}</p>
+        <<strong>Nama Siswa:</strong> {{ $riwayat->siswa->nama }}
+<p>{{ $riwayat->masalah }}</p>
+<div class="alert alert-success">{{ $riwayat->solusi }}</div>
+
     </div>
 
     <hr>

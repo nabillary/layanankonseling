@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Konseling;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
     // DASHBOARD
-   public function dashboard()
+    public function dashboard()
     {
-        // sementara (tanpa login)
-        $siswa = Siswa::first();
+        // Pakai auth kalau sudah login
+        $siswa = Auth::user()->siswa ?? Siswa::first();
 
         // konseling terakhir
         $lastKonseling = Konseling::where('id_siswa', $siswa->id_siswa ?? null)
@@ -26,47 +27,56 @@ class SiswaController extends Controller
         ));
     }
 
-    // PROFIL
+    /* ======================
+     * PROFIL
+     * ====================== */
     public function profil()
     {
-        $siswa = Siswa::first();
+        // Pakai auth kalau sudah login
+        $siswa = Auth::user()->siswa ?? Siswa::first();
 
-        return view('siswa.profil', compact('siswa'));
+        if (!$siswa) {
+            return redirect()->back()->with('error', 'Data siswa belum ada di database');
+        }
+
+        return view('siswa.profil', [
+            'title' => 'Profil Siswa',
+            'siswa' => $siswa
+        ]);
     }
 
     // UPDATE PROFIL
     public function updateProfil(Request $request)
     {
-        $siswa = Siswa::first();
-
+        // Validasi input
         $request->validate([
-            'nama'     => 'required',
-            'password' => 'nullable|min:5',
-            'foto'     => 'nullable|image|mimes:jpg,jpeg,png'
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $siswa->nama = $request->nama;
+        $siswa = Siswa::find($request->id_siswa);
 
-        if ($request->filled('password')) {
-            $siswa->password = Hash::make($request->password);
+        if (!$siswa) {
+            return back()->with('error', 'Data siswa tidak ditemukan');
         }
 
-      // UPLOAD FOTO
-if ($request->hasFile('foto')) {
-    $file = $request->file('foto');
-    $namaFile = time().'_'.$file->getClientOriginalName();
+        // HANYA UPDATE FOTO (nama dan data lain tidak diubah)
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if ($siswa->foto && file_exists(public_path('foto_siswa/' . $siswa->foto))) {
+                unlink(public_path('foto_siswa/' . $siswa->foto));
+            }
 
-    // SIMPAN KE public/assets/img
-    $file->move(public_path('assets/img'), $namaFile);
+            // Upload foto baru
+            $file = $request->file('foto');
+            $namaFile = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('foto_siswa'), $namaFile);
+            $siswa->foto = $namaFile;
+            
+            $siswa->save();
+            
+            return back()->with('success', 'Foto profil berhasil diperbarui!');
+        }
 
-    $siswa->foto = $namaFile;
-}
-
-
-        $siswa->save();
-
-        return redirect()
-            ->route('siswa.profil')
-            ->with('success', 'Profil berhasil diperbarui');
+        return back()->with('info', 'Tidak ada perubahan yang disimpan.');
     }
 }
