@@ -10,23 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller
 {
-    // DASHBOARD
     public function dashboard()
-    {
-        // Pakai auth kalau sudah login
-        $siswa = Auth::user()->siswa ?? Siswa::first();
+{
+    // sementara (1 siswa dulu)
+    $siswa = Siswa::first();
 
-        // konseling terakhir
-        $lastKonseling = Konseling::where('id_siswa', $siswa->id_siswa ?? null)
-            ->latest('tanggal')
-            ->first();
+    return view('siswa.dashboard', [
+    'terjadwal' => Konseling::where('status', 'terjadwal')->count(),
+    'selesai'   => Konseling::where('status', 'selesai')->count(),
+    'batal'     => Konseling::where('status', 'batal')->count(),
+    'lastKonseling' => Konseling::latest()->first(),
+]);
 
-        return view('siswa.dashboard', compact(
-            'siswa',
-            'lastKonseling'
-        ));
-    }
-
+}
     /* ======================
      * PROFIL
      * ====================== */
