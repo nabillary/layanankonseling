@@ -68,12 +68,27 @@
                                 <i class="bi bi-journal-text me-2"></i>Jenis Masalah
                             </div>
                         </th>
+                        <th>
+                            <div class="th-content">
+                                <i class="bi bi-lightbulb me-2"></i>Solusi
+                            </div>
+                        </th>
+                        <th style="width: 120px;">
+                            <div class="th-content">
+                                <i class="bi bi-flag me-2"></i>Status
+                            </div>
+                        </th>
+                        <th>
+                            <div class="th-content">
+                                <i class="bi bi-sticky me-2"></i>Catatan Terakhir
+                            </div>
+                        </th>
                         <th style="width: 180px;">
                             <div class="th-content">
                                 <i class="bi bi-calendar-event me-2"></i>Tanggal
                             </div>
                         </th>
-                        <th style="width: 140px;">
+                        <th style="width: 220px;">
                             <div class="th-content justify-content-center">
                                 <i class="bi bi-gear me-2"></i>Aksi
                             </div>
@@ -115,6 +130,45 @@
                         </td>
 
                         <td>
+                            <div class="solusi-text">
+                                @if($item->solusi)
+                                    {{ Str::limit($item->solusi, 50) }}
+                                @else
+                                    <span class="text-muted-custom">Belum ada solusi</span>
+                                @endif
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="status-badge status-{{ $item->status }}">
+                                <i class="bi bi-{{ 
+                                    $item->status == 'terjadwal' ? 'calendar-check' :
+                                    ($item->status == 'selesai' ? 'check-circle' : 'x-circle')
+                                }}"></i>
+                                {{ ucfirst($item->status) }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="catatan-display">
+                                @php
+                                    $catatanTerakhir = $item->riwayatKonseling ? $item->riwayatKonseling->sortByDesc('tanggal')->first() : null;
+                                @endphp
+                                @if($catatanTerakhir)
+                                    <div class="catatan-content">
+                                        <i class="bi bi-sticky-fill text-warning"></i>
+                                        <span>{{ Str::limit($catatanTerakhir->catatan, 60) }}</span>
+                                    </div>
+                                @else
+                                    <div class="catatan-empty">
+                                        <i class="bi bi-sticky"></i>
+                                        <span>Belum ada catatan dari guru BK</span>
+                                    </div>
+                                @endif
+                            </div>
+                        </td>
+
+                        <td>
                             <div class="date-info">
                                 <i class="bi bi-calendar-check-fill"></i>
                                 <div class="date-content">
@@ -124,11 +178,17 @@
                             </div>
                         </td>
 
-                        <td class="text-center">
-                            <a href="/guru/konseling/{{ $item->id_konseling }}" class="btn-action-modern">
-                                <i class="bi bi-eye"></i>
-                                <span>Edit</span>
-                            </a>
+                        <td>
+                            <div class="action-buttons-group">
+                                <a href="/guru/konseling/{{ $item->id_konseling }}" class="btn-action btn-edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                    Edit
+                                </a>
+                                <a href="/guru/riwayat/{{ $item->id_konseling }}" class="btn-action btn-add-note">
+                                    <i class="bi bi-plus-circle"></i>
+                                    Catatan
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach
@@ -483,6 +543,116 @@
         color: #4D869C;
     }
 
+    /* Solusi Text */
+    .solusi-text {
+        line-height: 1.5;
+        max-width: 300px;
+        color: #4D869C;
+        font-size: 0.875rem;
+    }
+
+    .text-muted-custom {
+        color: #94a3b8;
+        font-style: italic;
+    }
+
+    /* Status Badge */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.8125rem;
+        white-space: nowrap;
+    }
+
+    .status-terjadwal {
+        background: #CDE8E5;
+        color: #4D869C;
+        border: 2px solid #7AB2B2;
+    }
+
+    .status-selesai {
+        background: #d1fae5;
+        color: #065f46;
+        border: 2px solid #a7f3d0;
+    }
+
+    .status-batal {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 2px solid #fecaca;
+    }
+
+    /* Catatan Display */
+    .catatan-display {
+        max-width: 350px;
+    }
+
+    .catatan-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-radius: 8px;
+        border: 2px solid #fde68a;
+    }
+
+    .catatan-content i {
+        color: #d97706;
+        font-size: 1rem;
+        margin-top: 0.125rem;
+        flex-shrink: 0;
+    }
+
+    .catatan-content span {
+        color: #92400e;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .catatan-empty {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        background: #f1f5f9;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+    }
+
+    .catatan-empty i {
+        color: #94a3b8;
+        font-size: 1rem;
+    }
+
+    .catatan-empty span {
+        color: #64748b;
+        font-size: 0.875rem;
+        font-style: italic;
+    }
+
+    /* Catatan Badge */
+    .catatan-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        color: #92400e;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        border: 2px solid #fde68a;
+    }
+
+    .catatan-badge i {
+        font-size: 1rem;
+    }
+
     /* Date Info */
     .date-info {
         display: flex;
@@ -516,25 +686,46 @@
         font-size: 0.75rem;
     }
 
-    /* Action Button */
-    .btn-action-modern {
+    /* Action Buttons Group */
+    .action-buttons-group {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-action {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.625rem 1.25rem;
-        background: linear-gradient(135deg, #7AB2B2 0%, #4D869C 100%);
-        color: white;
+        padding: 0.625rem 1rem;
         border-radius: 8px;
         font-weight: 600;
         font-size: 0.875rem;
         text-decoration: none;
         transition: all 0.3s ease;
-        border: none;
+        white-space: nowrap;
     }
 
-    .btn-action-modern:hover {
+    .btn-edit {
+        background: linear-gradient(135deg, #7AB2B2 0%, #4D869C 100%);
+        color: white;
+    }
+
+    .btn-edit:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 16px rgba(77, 134, 156, 0.3);
+        color: white;
+    }
+
+    .btn-add-note {
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        color: white;
+    }
+
+    .btn-add-note:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(251, 191, 36, 0.3);
         color: white;
     }
 
@@ -753,6 +944,16 @@
             width: 40px;
             height: 40px;
             font-size: 1rem;
+        }
+
+        .action-buttons-group {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .btn-action {
+            width: 100%;
+            justify-content: center;
         }
 
         .empty-actions {

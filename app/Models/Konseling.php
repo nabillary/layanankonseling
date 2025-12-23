@@ -32,8 +32,8 @@ class Konseling extends Model
     }
 
     // Riwayat konseling (has many)
-    public function riwayat()
+    public function riwayatKonseling()
     {
-        return $this->hasMany(Riwayat::class, 'id_konseling', 'id_konseling');
+        return $this->hasMany(RiwayatKonseling::class, 'id_konseling', 'id_konseling');
     }
 }

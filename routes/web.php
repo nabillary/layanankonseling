@@ -30,9 +30,11 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+// ========================
+// SISWA
+// ========================
 Route::prefix('siswa')
     ->name('siswa.')
-   
     ->group(function () {
 
         Route::get('/dashboard', [SiswaController::class, 'dashboard'])
@@ -62,18 +64,38 @@ Route::prefix('siswa')
 // ========================
 Route::middleware(['auth', 'role:guru'])->group(function () {
 
-    Route::get('/guru/dashboard', [GuruController::class, 'dashboard']);
+    // Dashboard
+    Route::get('/guru/dashboard', [GuruController::class, 'dashboard'])
+        ->name('guru.dashboard');
 
-    Route::get('/guru/konseling', [GuruController::class, 'index']);
-    Route::get('/guru/konseling/{id}', [GuruController::class, 'show']);
+    // Konseling Masuk (Status: Terjadwal)
+    Route::get('/guru/konseling', [GuruController::class, 'index'])
+        ->name('guru.konseling');
+    
+    Route::get('/guru/konseling/{id}', [GuruController::class, 'show'])
+        ->name('guru.konseling.show');
+    
+    Route::post('/guru/konseling/{id}/solusi', [GuruController::class, 'solusi'])
+        ->name('guru.konseling.solusi');
 
-    Route::get('/guru/riwayat', [RiwayatController::class, 'indexGuru']);
-    Route::get('/guru/riwayat/{id}', [RiwayatController::class, 'showGuru']);
+    // Riwayat (Status: Selesai & Batal)
+    Route::get('/guru/riwayat', [GuruController::class, 'riwayat'])
+        ->name('guru.riwayat');
+    
+    // ✅ ROUTE BARU - Detail riwayat dengan form catatan
+    Route::get('/guru/riwayat/{id}', [GuruController::class, 'showRiwayat'])
+        ->name('guru.riwayat.show');
+    
+    // ✅ ROUTE BARU - Simpan/update catatan riwayat
+    Route::post('/guru/riwayat/{id}/catatan', [GuruController::class, 'storeCatatan'])
+        ->name('guru.riwayat.catatan');
 
-    Route::post('/guru/konseling/{id}/solusi', [GuruController::class, 'solusi']);
-    Route::post('/guru/konseling/{id}/batal', [KonselingController::class, 'batal'])->name('guru.konseling.batal');
-    Route::get('/guru/profil', [GuruController::class, 'profil']);
-    Route::post('/guru/profil/update', [GuruController::class, 'updateProfil']);
+    // Profil
+    Route::get('/guru/profil', [GuruController::class, 'profil'])
+        ->name('guru.profil');
+    
+    Route::post('/guru/profil/update', [GuruController::class, 'updateProfil'])
+        ->name('guru.profil.update');
 });
 
 
