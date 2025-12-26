@@ -23,38 +23,16 @@
                     <div class="stat-content">
                         <div class="stat-info">
                             <p class="stat-label">Terjadwal</p>
-                            <h2 class="stat-value">{{ $menunggu }}</h2>
+                            <h2 class="stat-value">{{ $terjadwal }}</h2>
                             <span class="stat-badge badge-warning">Perlu Perhatian</span>
                         </div>
                         <div class="stat-icon-wrapper stat-icon-warning">
-                            <i class="bi bi-hourglass-split"></i>
+                            <i class="bi bi-calendar-check"></i>
                         </div>
                     </div>
                     <div class="stat-footer">
                         <span class="stat-trend">
-                            <i class="bi bi-arrow-up"></i> Prioritas tinggi
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-            <div class="stat-card stat-primary">
-                <div class="stat-card-body">
-                    <div class="stat-content">
-                        <div class="stat-info">
-                            <p class="stat-label">Sedang Diproses</p>
-                            <h2 class="stat-value">{{ $proses }}</h2>
-                            <span class="stat-badge badge-primary">Dalam Proses</span>
-                        </div>
-                        <div class="stat-icon-wrapper stat-icon-primary">
-                            <i class="bi bi-arrow-repeat"></i>
-                        </div>
-                    </div>
-                    <div class="stat-footer">
-                        <span class="stat-trend">
-                            <i class="bi bi-activity"></i> Sedang berlangsung
+                            <i class="bi bi-arrow-up"></i> Menunggu tindakan
                         </span>
                     </div>
                 </div>
@@ -82,6 +60,28 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="stat-card stat-danger">
+                <div class="stat-card-body">
+                    <div class="stat-content">
+                        <div class="stat-info">
+                            <p class="stat-label">Dibatalkan</p>
+                            <h2 class="stat-value">{{ $batal }}</h2>
+                            <span class="stat-badge badge-danger">Dibatalkan</span>
+                        </div>
+                        <div class="stat-icon-wrapper stat-icon-danger">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </div>
+                    </div>
+                    <div class="stat-footer">
+                        <span class="stat-trend">
+                            <i class="bi bi-dash-circle"></i> Konseling telah dibatalkan
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Recent Counseling Table -->
@@ -91,7 +91,6 @@
                 <h2 class="section-title">Konseling Terbaru</h2>
                 <p class="section-subtitle">Daftar konseling yang baru masuk dan memerlukan tindakan</p>
             </div>
-            
         </div>
 
         <div class="table-card">
@@ -145,12 +144,12 @@
 
                             <td>
                                 <span class="status-badge status-{{ 
-                                    $item->status == 'terjadwal' ? 'warning' :
-                                    ($item->status == 'selesai' ? 'success' : 'secondary')
+                                    $item->status == 'terjadwal' ? 'terjadwal' :
+                                    ($item->status == 'selesai' ? 'selesai' : 'batal')
                                 }}">
                                     <i class="bi bi-{{ 
-                                        $item->status == 'terjadwal' ? 'clock' :
-                                        ($item->status == 'selesai' ? 'check-circle' : 'circle')
+                                        $item->status == 'terjadwal' ? 'calendar-check' :
+                                        ($item->status == 'selesai' ? 'check-circle' : 'x-circle')
                                     }}"></i>
                                     {{ ucfirst($item->status) }}
                                 </span>
@@ -174,9 +173,6 @@
                 </div>
                 <h5 class="empty-title">Belum Ada Data Konseling</h5>
                 <p class="empty-text">Data konseling siswa akan muncul di sini ketika ada pengajuan baru</p>
-                <a href="/guru/konseling/create" class="btn btn-primary mt-3">
-                    <i class="bi bi-plus-circle me-2"></i>Tambah Konseling
-                </a>
             </div>
             @endif
         </div>
@@ -281,14 +277,14 @@
     color: #92400e;
 }
 
-.badge-primary {
-    background: #dbeafe;
-    color: #1e40af;
-}
-
 .badge-success {
     background: #d1fae5;
     color: #065f46;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 .stat-icon-wrapper {
@@ -302,18 +298,18 @@
 }
 
 .stat-icon-warning {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    color: #d97706;
-}
-
-.stat-icon-primary {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    color: #2563eb;
+    background: linear-gradient(135deg, #CDE8E5 0%, #7AB2B2 100%);
+    color: #4D869C;
 }
 
 .stat-icon-success {
     background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
     color: #059669;
+}
+
+.stat-icon-danger {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #dc2626;
 }
 
 .stat-footer {
@@ -331,15 +327,15 @@
 
 /* Color Variants */
 .stat-warning .stat-value {
-    color: #d97706;
-}
-
-.stat-primary .stat-value {
-    color: #2563eb;
+    color: #4D869C;
 }
 
 .stat-success .stat-value {
     color: #059669;
+}
+
+.stat-danger .stat-value {
+    color: #dc2626;
 }
 
 /* Table Section */
@@ -369,25 +365,6 @@
     margin: 0.25rem 0 0 0;
 }
 
-.btn-outline-primary {
-    padding: 0.625rem 1.25rem;
-    border: 2px solid #2563eb;
-    color: #2563eb;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-}
-
-.btn-outline-primary:hover {
-    background: #2563eb;
-    color: white;
-    transform: translateX(4px);
-}
-
 /* Table Card */
 .table-card {
     background: white;
@@ -409,17 +386,17 @@
 }
 
 .modern-table thead {
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: linear-gradient(135deg, #EEF7FF 0%, #CDE8E5 100%);
 }
 
 .modern-table thead th {
     padding: 1.25rem 1.5rem;
     font-weight: 600;
     font-size: 0.875rem;
-    color: #475569;
+    color: #4D869C;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid #CDE8E5;
 }
 
 .th-content {
@@ -428,7 +405,7 @@
 }
 
 .modern-table tbody tr {
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid #EEF7FF;
     transition: all 0.2s ease;
 }
 
@@ -437,12 +414,12 @@
 }
 
 .table-row-hover:hover {
-    background: #f8fafc;
+    background: #EEF7FF;
 }
 
 .modern-table tbody td {
     padding: 1.25rem 1.5rem;
-    color: #334155;
+    color: #4D869C;
     font-size: 0.9375rem;
     vertical-align: middle;
 }
@@ -458,7 +435,7 @@
     width: 42px;
     height: 42px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #7AB2B2 0%, #4D869C 100%);
     color: white;
     display: flex;
     align-items: center;
@@ -466,6 +443,7 @@
     font-weight: 700;
     font-size: 1.125rem;
     flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(77, 134, 156, 0.25);
 }
 
 .student-details {
@@ -475,13 +453,13 @@
 }
 
 .student-name {
-    color: #1e293b;
+    color: #4D869C;
     font-weight: 600;
     font-size: 0.9375rem;
 }
 
 .student-meta {
-    color: #94a3b8;
+    color: #7AB2B2;
     font-size: 0.8125rem;
 }
 
@@ -496,6 +474,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.5;
+    color: #4D869C;
 }
 
 /* Status Badge */
@@ -510,19 +489,22 @@
     white-space: nowrap;
 }
 
-.status-warning {
-    background: #fef3c7;
-    color: #92400e;
+.status-terjadwal {
+    background: #CDE8E5;
+    color: #4D869C;
+    border: 2px solid #7AB2B2;
 }
 
-.status-success {
+.status-selesai {
     background: #d1fae5;
     color: #065f46;
+    border: 2px solid #a7f3d0;
 }
 
-.status-secondary {
-    background: #f1f5f9;
-    color: #475569;
+.status-batal {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #fecaca;
 }
 
 /* Action Button */
@@ -531,7 +513,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, #7AB2B2 0%, #4D869C 100%);
     color: white;
     border-radius: 8px;
     font-weight: 600;
@@ -543,7 +525,7 @@
 
 .btn-action-modern:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 16px rgba(77, 134, 156, 0.3);
     color: white;
 }
 
@@ -558,7 +540,7 @@
     height: 120px;
     margin: 0 auto 1.5rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    background: linear-gradient(135deg, #EEF7FF 0%, #CDE8E5 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -566,41 +548,21 @@
 
 .empty-icon i {
     font-size: 3.5rem;
-    color: #94a3b8;
+    color: #7AB2B2;
 }
 
 .empty-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1e293b;
+    color: #4D869C;
     margin-bottom: 0.5rem;
 }
 
 .empty-text {
-    color: #64748b;
+    color: #7AB2B2;
     font-size: 0.9375rem;
     max-width: 400px;
     margin: 0 auto;
-}
-
-.btn-primary {
-    padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
-    color: white;
 }
 
 /* Responsive Design */
@@ -633,6 +595,7 @@
         padding: 1rem;
         font-size: 0.875rem;
     }
+    
     .student-avatar {
         width: 36px;
         height: 36px;
