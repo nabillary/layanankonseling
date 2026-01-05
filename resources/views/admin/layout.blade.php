@@ -388,6 +388,23 @@
                 flex-direction: column;
             }
         }
+        /* ===== SIDEBAR RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1050;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 
@@ -432,18 +449,26 @@
 
     <!-- NAVBAR -->
     <div class="navbar-custom d-flex justify-content-between align-items-center">
-        <div class="user-info">
-            <img class="avatar"
-                 src="https://ui-avatars.com/api/?name=Admin&background=4D869C&color=fff">
-            <div>
-                <div class="user-name">{{ auth()->user()->username }}</div>
-                <div class="user-role">Administrator</div>
+        <div class="d-flex align-items-center gap-3">
+            <!-- HAMBURGER -->
+            <button id="toggleSidebar"
+                    class="btn btn-outline-secondary d-md-none">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="user-info">
+                <img class="avatar"
+                    src="https://ui-avatars.com/api/?name=Admin&background=4D869C&color=fff">
+                <div>
+                    <div class="user-name">{{ auth()->user()->username }}</div>
+                    <div class="user-role">Administrator</div>
+                </div>
             </div>
         </div>
 
         <a href="{{ route('logout') }}"
-           onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-           class="btn-logout">
+        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+        class="btn-logout">
             <i class="bi bi-box-arrow-right me-2"></i>Logout
         </a>
     </div>
@@ -456,5 +481,23 @@
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (!toggleBtn || !sidebar) {
+        console.log('Sidebar / Toggle button not found');
+        return;
+    }
+
+    toggleBtn.addEventListener('click', function () {
+        sidebar.classList.toggle('active');
+        console.log('Sidebar toggled');
+    });
+});
+</script>
+
+
 </body>
 </html>

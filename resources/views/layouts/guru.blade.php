@@ -391,23 +391,20 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="user-info">
                     <img src="https://ui-avatars.com/api/?name=Guru+BK&background=4D869C&color=fff&bold=true" class="avatar">
-                      <div>
-                 <div>
-                        <div class="user-name">{{ $guru->nama ?? 'Guru BK' }}</div>
-                        <div class="user-role">Guru bimbingan konseling</div>
-                    </div>
-            </div>
+                <div>
+                <div>
+                    <div class="user-name">{{ $guru->nama ?? 'Guru BK' }}</div>
+                    <div class="user-role">Guru bimbingan konseling</div>
                 </div>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
-                    class="btn-logout">
-                        <i class="bi bi-box-arrow-right me-2"></i>Logout
-                </a>
             </div>
         </div>
-        
-        @yield('content')
+        <a href="{{ route('logout') }}"
+            onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+            class="btn-logout">
+            <i class="bi bi-box-arrow-right me-2"></i>Logout
+        </a>
     </div>
+        @yield('content')
     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
         @csrf
     </form>

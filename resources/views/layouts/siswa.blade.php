@@ -402,19 +402,19 @@
                         <div class="user-role">Siswa SMKN 11 Bandung</div>
                     </div>
                 </div>
-               <form action="{{ route('logout') }}" method="POST" class="d-inline">
-    @csrf
-    <button class="dropdown-item text-danger">
-        <i class="bi bi-box-arrow-right"></i> Logout
-    </button>
-</form>
-
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                    class="btn-logout">
+                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                </a>
             </div>
         </div>
         
         @yield('content')
     </div>
-    
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
