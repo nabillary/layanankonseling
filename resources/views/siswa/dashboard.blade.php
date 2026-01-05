@@ -243,6 +243,9 @@
     color: white;
     box-shadow: 0 4px 16px rgba(77, 134, 156, 0.3);
 }
+.dashboard-header .page-title {
+    color: #ffffff !important;
+}
 
 .header-content {
     display: flex;
