@@ -3,7 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>{{ $title ?? 'BK Sebelas' }}</title>
+
+ <!-- FAVICON -->
+<link rel="icon" href="{{ asset('assets/img/favicon.ico') }}" type="image/x-icon">
+<link rel="apple-touch-icon" href="{{ asset('assets/img/faviconx.png') }}">
+
 
     <!-- CSS -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">

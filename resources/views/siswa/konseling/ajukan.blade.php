@@ -118,6 +118,14 @@
 </div>
 
 <style>
+/* Color Variables */
+:root {
+    --color-mint: #CDE8E5;
+    --color-light-blue: #EEF7FF;
+    --color-teal: #7AB2B2;
+    --color-dark-teal: #4D869C;
+}
+
 /* Container */
 .ajukan-container {
     padding: 2rem 0;
@@ -139,14 +147,14 @@
 .header-icon-ajukan {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     color: white;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 16px rgba(77, 134, 156, 0.3);
     flex-shrink: 0;
 }
 
@@ -169,16 +177,16 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-mint) 100%);
     border-radius: 12px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid var(--color-teal);
     margin-bottom: 2rem;
 }
 
 .alert-icon {
     width: 40px;
     height: 40px;
-    background: #3b82f6;
+    background: var(--color-teal);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -195,13 +203,13 @@
 .alert-content h5 {
     font-size: 1rem;
     font-weight: 700;
-    color: #1e40af;
+    color: var(--color-dark-teal);
     margin: 0 0 0.375rem 0;
 }
 
 .alert-content p {
     font-size: 0.875rem;
-    color: #1e40af;
+    color: var(--color-dark-teal);
     margin: 0;
     line-height: 1.6;
 }
@@ -235,7 +243,7 @@
 }
 
 .form-header-content i {
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1.25rem;
 }
 
@@ -268,7 +276,7 @@
 }
 
 .form-label-ajukan i {
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1.125rem;
 }
 
@@ -293,9 +301,9 @@
 
 .form-control-ajukan:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--color-teal);
     background: white;
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    box-shadow: 0 0 0 4px rgba(122, 178, 178, 0.1);
 }
 
 .form-control-ajukan::placeholder {
@@ -333,13 +341,13 @@
 }
 
 .help-text-inline i {
-    color: #3b82f6;
+    color: var(--color-teal);
 }
 
 /* Tips Box */
 .tips-box {
     padding: 1.5rem;
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: linear-gradient(135deg, #fef9e7 0%, #fdeaa8 100%);
     border-radius: 12px;
     border: 2px solid #fcd34d;
     margin-bottom: 2rem;
@@ -416,7 +424,7 @@
 
 .btn-submit-ajukan {
     padding: 0.875rem 2rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -427,12 +435,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(77, 134, 156, 0.3);
 }
 
 .btn-submit-ajukan:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 8px 20px rgba(77, 134, 156, 0.4);
 }
 
 .btn-submit-ajukan:active {
@@ -459,7 +467,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1.25rem;
     flex-shrink: 0;
 }

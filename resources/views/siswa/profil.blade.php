@@ -49,7 +49,7 @@
                         <div class="photo-wrapper">
                             <div class="photo-container">
                                 <img 
-                                    src="{{ $siswa->foto ? asset('foto_siswa/'.$siswa->foto) : 'https://ui-avatars.com/api/?name='.$siswa->nama.'&background=3b82f6&color=fff&size=300' }}"
+                                    src="{{ $siswa->foto ? asset('foto_siswa/'.$siswa->foto) : 'https://ui-avatars.com/api/?name='.$siswa->nama.'&background=4D869C&color=fff&size=300' }}"
                                     alt="Foto Profil"
                                     class="profile-photo"
                                     id="photoPreview"
@@ -73,10 +73,7 @@
                                     accept="image/*"
                                 >
                             </label>
-                            <p class="upload-hint">
-                                <i class="bi bi-info-circle"></i>
-                                Format: JPG, PNG (Max: 2MB)
-                            </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -165,18 +162,18 @@
     </div>
 
     <!-- Info Note -->
-    <div class="info-note">
-        <div class="note-icon-info">
-            <i class="bi bi-shield-check"></i>
-        </div>
-        <div class="note-content-info">
-            <h6>Keamanan Data</h6>
-            <p>Data pribadi Anda dilindungi dan hanya dapat diakses oleh Anda dan pihak sekolah yang berwenang.</p>
-        </div>
-    </div>
+    
 </div>
 
 <style>
+/* Color Variables */
+:root {
+    --color-mint: #CDE8E5;
+    --color-light-blue: #EEF7FF;
+    --color-teal: #7AB2B2;
+    --color-dark-teal: #4D869C;
+}
+
 /* Container */
 .profil-container {
     padding: 2rem 0;
@@ -198,14 +195,14 @@
 .header-icon-profil {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     color: white;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 16px rgba(77, 134, 156, 0.3);
     flex-shrink: 0;
 }
 
@@ -295,8 +292,8 @@
 /* Photo Section */
 .photo-section {
     padding: 2rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    border-right: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-mint) 100%);
+    border-right: 1px solid var(--color-mint);
     height: 100%;
 }
 
@@ -306,12 +303,12 @@
     gap: 0.625rem;
     font-size: 1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--color-dark-teal);
     margin-bottom: 1.5rem;
 }
 
 .photo-header i {
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1.125rem;
 }
 
@@ -326,7 +323,8 @@
     margin: 0 auto;
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(77, 134, 156, 0.2);
+    border: 3px solid white;
 }
 
 .profile-photo {
@@ -341,7 +339,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(59, 130, 246, 0.9);
+    background: linear-gradient(135deg, rgba(77, 134, 156, 0.9) 0%, rgba(122, 178, 178, 0.9) 100%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -376,18 +374,18 @@
     gap: 0.5rem;
     padding: 1rem;
     background: white;
-    border: 2px dashed #cbd5e1;
+    border: 2px dashed var(--color-teal);
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #64748b;
+    color: var(--color-dark-teal);
     font-weight: 600;
 }
 
 .upload-label:hover {
-    border-color: #3b82f6;
-    background: #eff6ff;
-    color: #3b82f6;
+    border-color: var(--color-dark-teal);
+    background: var(--color-light-blue);
+    color: var(--color-dark-teal);
 }
 
 .upload-label i {
@@ -401,7 +399,7 @@
 .upload-hint {
     margin-top: 0.75rem;
     font-size: 0.8125rem;
-    color: #94a3b8;
+    color: #64748b;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -419,14 +417,14 @@
     gap: 0.625rem;
     font-size: 1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--color-dark-teal);
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid var(--color-mint);
 }
 
 .info-header i {
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1.125rem;
 }
 
@@ -448,11 +446,11 @@
     gap: 0.5rem;
     font-size: 0.9375rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--color-dark-teal);
 }
 
 .form-label-profil i {
-    color: #3b82f6;
+    color: var(--color-teal);
     font-size: 1rem;
 }
 
@@ -463,7 +461,7 @@
 .form-control-profil {
     width: 100%;
     padding: 0.875rem 1rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--color-mint);
     border-radius: 10px;
     font-size: 0.9375rem;
     color: #1e293b;
@@ -472,7 +470,7 @@
 }
 
 .form-control-profil.disabled {
-    background: #f8fafc;
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, #f8fafc 100%);
     color: #64748b;
     cursor: not-allowed;
 }
@@ -503,7 +501,7 @@
     justify-content: flex-end;
     margin-top: 1rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--color-mint);
 }
 
 .btn-cancel-profil {
@@ -529,7 +527,7 @@
 
 .btn-submit-profil {
     padding: 0.875rem 2rem;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     color: white;
     border: none;
     border-radius: 10px;
@@ -540,12 +538,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(77, 134, 156, 0.3);
 }
 
 .btn-submit-profil:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 8px 20px rgba(77, 134, 156, 0.4);
 }
 
 /* Info Note */
@@ -554,16 +552,16 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 1.25rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-mint) 100%);
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-mint);
 }
 
 .note-icon-info {
     width: 40px;
     height: 40px;
     background: white;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--color-mint);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -576,7 +574,7 @@
 .note-content-info h6 {
     font-size: 0.9375rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--color-dark-teal);
     margin: 0 0 0.375rem 0;
 }
 
@@ -591,7 +589,7 @@
 @media (max-width: 991px) {
     .photo-section {
         border-right: none;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid var(--color-mint);
     }
 }
 

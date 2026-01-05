@@ -1,116 +1,188 @@
 @extends('admin.layout')
 
 @section('content')
-<h1 class="page-title">Dashboard Admin</h1>
-
-<div class="row g-3">
-    <div class="col-lg-4 col-md-6">
-        <div class="stat-card primary">
-            <div class="stat-icon">
-                <i class="bi bi-people-fill"></i>
+<div class="dashboard-admin-container">
+    <!-- Page Header -->
+    <div class="page-header-admin">
+        <div class="header-content-admin">
+            <div class="header-icon-admin">
+                <i class="bi bi-speedometer2"></i>
             </div>
-            <h6>Total Siswa</h6>
-            <h3>{{ $totalSiswa }}</h3>
+            <div>
+                <h1 class="page-title-admin">Dashboard Admin</h1>
+                <p class="page-subtitle-admin">Pantau sistem dan statistik secara real-time</p>
+            </div>
+        </div>
+        <div class="header-date-admin">
+            <i class="bi bi-calendar-event"></i>
+            <span>{{ date('d M Y, H:i') }}</span>
         </div>
     </div>
 
-    <div class="col-lg-4 col-md-6">
-        <div class="stat-card success">
-            <div class="stat-icon">
-                <i class="bi bi-person-badge-fill"></i>
-            </div>
-            <h6>Total Guru BK</h6>
-            <h3>{{ $totalGuru }}</h3>
-        </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6">
-        <div class="stat-card warning">
-            <div class="stat-icon">
-                <i class="bi bi-chat-dots-fill"></i>
-            </div>
-            <h6>Total Konseling</h6>
-            <h3>{{ $totalKonseling }}</h3>
-        </div>
-    </div>
-</div>
-
-<h2 class="section-title">Statistik Sistem</h2>
-
-<div class="row g-3">
-    <!-- Pie Chart Card -->
-    <div class="col-lg-6">
-        <div class="table-card">
-            <div class="card-header-custom">
-                <h5 class="mb-0">Distribusi Data</h5>
-                <span class="badge bg-primary">Overview</span>
-            </div>
-            <div class="chart-container">
-                <div class="pie-chart-wrapper">
-                    <svg viewBox="0 0 200 200" class="pie-svg">
-                        @php
-                            $total = $totalSiswa + $totalGuru + $totalKonseling;
-                            $siswaPercent = $total > 0 ? ($totalSiswa / $total) * 100 : 0;
-                            $guruPercent = $total > 0 ? ($totalGuru / $total) * 100 : 0;
-                            $konselingPercent = $total > 0 ? ($totalKonseling / $total) * 100 : 0;
-                        @endphp
-                        
-                        <!-- Siswa Slice -->
-                        <circle cx="100" cy="100" r="80" fill="none" 
-                                stroke="#6ba5a7" stroke-width="60"
-                                stroke-dasharray="{{ ($siswaPercent/100) * 502.65 }} 502.65"
-                                transform="rotate(-90 100 100)"/>
-                        
-                        <!-- Guru Slice -->
-                        <circle cx="100" cy="100" r="80" fill="none" 
-                                stroke="#5cb85c" stroke-width="60"
-                                stroke-dasharray="{{ ($guruPercent/100) * 502.65 }} 502.65"
-                                stroke-dashoffset="{{ -($siswaPercent/100) * 502.65 }}"
-                                transform="rotate(-90 100 100)"/>
-                        
-                        <!-- Konseling Slice -->
-                        <circle cx="100" cy="100" r="80" fill="none" 
-                                stroke="#f0ad4e" stroke-width="60"
-                                stroke-dasharray="{{ ($konselingPercent/100) * 502.65 }} 502.65"
-                                stroke-dashoffset="{{ -(($siswaPercent + $guruPercent)/100) * 502.65 }}"
-                                transform="rotate(-90 100 100)"/>
-                        
-                        <!-- Center Circle -->
-                        <circle cx="100" cy="100" r="50" fill="white"/>
-                        <text x="100" y="95" text-anchor="middle" class="pie-label">Total</text>
-                        <text x="100" y="115" text-anchor="middle" class="pie-value">{{ $total }}</text>
-                    </svg>
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="stat-card-admin stat-primary-admin">
+                <div class="stat-card-body-admin">
+                    <div class="stat-content-admin">
+                        <div class="stat-info-admin">
+                            <p class="stat-label-admin">Total Siswa</p>
+                            <h2 class="stat-value-admin">{{ $totalSiswa }}</h2>
+                            <span class="stat-badge-admin badge-primary-admin">Terdaftar</span>
+                        </div>
+                        <div class="stat-icon-wrapper-admin stat-icon-primary-admin">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                    <div class="stat-footer-admin">
+                        <span class="stat-trend-admin">
+                            <i class="bi bi-arrow-up"></i> Data siswa aktif
+                        </span>
+                    </div>
                 </div>
-                <div class="chart-legend">
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #6ba5a7;"></span>
-                        <span class="legend-text">Siswa</span>
-                        <strong>{{ $totalSiswa }} ({{ number_format($siswaPercent, 1) }}%)</strong>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="stat-card-admin stat-success-admin">
+                <div class="stat-card-body-admin">
+                    <div class="stat-content-admin">
+                        <div class="stat-info-admin">
+                            <p class="stat-label-admin">Total Guru BK</p>
+                            <h2 class="stat-value-admin">{{ $totalGuru }}</h2>
+                            <span class="stat-badge-admin badge-success-admin">Aktif</span>
+                        </div>
+                        <div class="stat-icon-wrapper-admin stat-icon-success-admin">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
                     </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #5cb85c;"></span>
-                        <span class="legend-text">Guru BK</span>
-                        <strong>{{ $totalGuru }} ({{ number_format($guruPercent, 1) }}%)</strong>
+                    <div class="stat-footer-admin">
+                        <span class="stat-trend-admin">
+                            <i class="bi bi-check-circle"></i> Guru terdaftar
+                        </span>
                     </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #f0ad4e;"></span>
-                        <span class="legend-text">Konseling</span>
-                        <strong>{{ $totalKonseling }} ({{ number_format($konselingPercent, 1) }}%)</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="stat-card-admin stat-warning-admin">
+                <div class="stat-card-body-admin">
+                    <div class="stat-content-admin">
+                        <div class="stat-info-admin">
+                            <p class="stat-label-admin">Total Konseling</p>
+                            <h2 class="stat-value-admin">{{ $totalKonseling }}</h2>
+                            <span class="stat-badge-admin badge-warning-admin">Record</span>
+                        </div>
+                        <div class="stat-icon-wrapper-admin stat-icon-warning-admin">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                    </div>
+                    <div class="stat-footer-admin">
+                        <span class="stat-trend-admin">
+                            <i class="bi bi-graph-up"></i> Total konseling
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bar Chart Card -->
-    <div class="col-lg-6">
-        <div class="table-card">
-            <div class="card-header-custom">
-                <h5 class="mb-0">Perbandingan Data</h5>
-                <span class="badge bg-success">Statistik</span>
+    <!-- Section Title -->
+    <h2 class="section-title-admin">
+        <i class="bi bi-bar-chart-fill me-2"></i>Statistik Sistem
+    </h2>
+
+    <!-- Charts -->
+    <div class="row g-4 mb-4">
+        <!-- Pie Chart Card -->
+        <div class="col-lg-6">
+            <div class="chart-card-admin">
+                <div class="chart-header-admin">
+                    <div class="chart-header-content-admin">
+                        <i class="bi bi-pie-chart-fill"></i>
+                        <span>Distribusi Data</span>
+                    </div>
+                    <span class="chart-badge-admin badge-primary-admin">Overview</span>
+                </div>
+                <div class="chart-body-admin">
+                    @php
+                        $total = $totalSiswa + $totalGuru + $totalKonseling;
+                        $siswaPercent = $total > 0 ? ($totalSiswa / $total) * 100 : 0;
+                        $guruPercent = $total > 0 ? ($totalGuru / $total) * 100 : 0;
+                        $konselingPercent = $total > 0 ? ($totalKonseling / $total) * 100 : 0;
+                    @endphp
+                    
+                    <div class="pie-chart-container-admin">
+                        <svg viewBox="0 0 200 200" class="pie-svg-admin">
+                            <!-- Siswa Slice -->
+                            <circle cx="100" cy="100" r="75" fill="none" 
+                                    stroke="#4D869C" stroke-width="50"
+                                    stroke-dasharray="{{ ($siswaPercent/100) * 471.24 }} 471.24"
+                                    transform="rotate(-90 100 100)"
+                                    class="pie-slice"/>
+                            
+                            <!-- Guru Slice -->
+                            <circle cx="100" cy="100" r="75" fill="none" 
+                                    stroke="#10b981" stroke-width="50"
+                                    stroke-dasharray="{{ ($guruPercent/100) * 471.24 }} 471.24"
+                                    stroke-dashoffset="{{ -($siswaPercent/100) * 471.24 }}"
+                                    transform="rotate(-90 100 100)"
+                                    class="pie-slice"/>
+                            
+                            <!-- Konseling Slice -->
+                            <circle cx="100" cy="100" r="75" fill="none" 
+                                    stroke="#f59e0b" stroke-width="50"
+                                    stroke-dasharray="{{ ($konselingPercent/100) * 471.24 }} 471.24"
+                                    stroke-dashoffset="{{ -(($siswaPercent + $guruPercent)/100) * 471.24 }}"
+                                    transform="rotate(-90 100 100)"
+                                    class="pie-slice"/>
+                            
+                            <!-- Center Circle -->
+                            <circle cx="100" cy="100" r="50" fill="white"/>
+                            <text x="100" y="95" text-anchor="middle" class="pie-label-admin">Total</text>
+                            <text x="100" y="115" text-anchor="middle" class="pie-value-admin">{{ $total }}</text>
+                        </svg>
+                    </div>
+                    
+                    <div class="chart-legend-admin">
+                        <div class="legend-item-admin">
+                            <div class="legend-indicator-admin">
+                                <span class="legend-dot-admin" style="background: #4D869C;"></span>
+                                <span class="legend-text-admin">Siswa</span>
+                            </div>
+                            <strong class="legend-value-admin">{{ $totalSiswa }} <small>({{ number_format($siswaPercent, 1) }}%)</small></strong>
+                        </div>
+                        <div class="legend-item-admin">
+                            <div class="legend-indicator-admin">
+                                <span class="legend-dot-admin" style="background: #10b981;"></span>
+                                <span class="legend-text-admin">Guru BK</span>
+                            </div>
+                            <strong class="legend-value-admin">{{ $totalGuru }} <small>({{ number_format($guruPercent, 1) }}%)</small></strong>
+                        </div>
+                        <div class="legend-item-admin">
+                            <div class="legend-indicator-admin">
+                                <span class="legend-dot-admin" style="background: #f59e0b;"></span>
+                                <span class="legend-text-admin">Konseling</span>
+                            </div>
+                            <strong class="legend-value-admin">{{ $totalKonseling }} <small>({{ number_format($konselingPercent, 1) }}%)</small></strong>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="chart-container">
-                <div class="bar-chart">
+        </div>
+
+        <!-- Bar Chart Card -->
+        <div class="col-lg-6">
+            <div class="chart-card-admin">
+                <div class="chart-header-admin">
+                    <div class="chart-header-content-admin">
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Perbandingan Data</span>
+                    </div>
+                    <span class="chart-badge-admin badge-success-admin">Statistik</span>
+                </div>
+                <div class="chart-body-admin">
                     @php
                         $maxValue = max($totalSiswa, $totalGuru, $totalKonseling);
                         $siswaHeight = $maxValue > 0 ? ($totalSiswa / $maxValue) * 100 : 0;
@@ -118,356 +190,601 @@
                         $konselingHeight = $maxValue > 0 ? ($totalKonseling / $maxValue) * 100 : 0;
                     @endphp
                     
-                    <div class="bar-item">
-                        <div class="bar-wrapper">
-                            <div class="bar-fill bar-primary" style="height: {!! $siswaHeight !!}%">
-                                <span class="bar-value">{{ $totalSiswa }}</span>
+                    <div class="bar-chart-admin">
+                        <div class="bar-item-admin">
+                            <div class="bar-wrapper-admin">
+                                <div class="bar-fill-admin bar-primary-fill-admin" style="height: {{ $siswaHeight }}%">
+                                    <span class="bar-value-admin">{{ $totalSiswa }}</span>
+                                </div>
+                            </div>
+                            <div class="bar-label-admin">
+                                <i class="bi bi-people-fill"></i>
+                                Siswa
                             </div>
                         </div>
-                        <div class="bar-label">Siswa</div>
-                    </div>
-                    
-                    <div class="bar-item">
-                        <div class="bar-wrapper">
-                            <div class="bar-fill bar-success" style="height: {!! $guruHeight !!}%">
-                                <span class="bar-value">{{ $totalGuru }}</span>
+                        
+                        <div class="bar-item-admin">
+                            <div class="bar-wrapper-admin">
+                                <div class="bar-fill-admin bar-success-fill-admin" style="height: {{ $guruHeight }}%">
+                                    <span class="bar-value-admin">{{ $totalGuru }}</span>
+                                </div>
+                            </div>
+                            <div class="bar-label-admin">
+                                <i class="bi bi-person-badge-fill"></i>
+                                Guru BK
                             </div>
                         </div>
-                        <div class="bar-label">Guru BK</div>
-                    </div>
-                    
-                    <div class="bar-item">
-                        <div class="bar-wrapper">
-                            <div class="bar-fill bar-warning" style="height: {!! $konselingHeight !!}%">
-                                <span class="bar-value">{{ $totalKonseling }}</span>
+                        
+                        <div class="bar-item-admin">
+                            <div class="bar-wrapper-admin">
+                                <div class="bar-fill-admin bar-warning-fill-admin" style="height: {{ $konselingHeight }}%">
+                                    <span class="bar-value-admin">{{ $totalKonseling }}</span>
+                                </div>
+                            </div>
+                            <div class="bar-label-admin">
+                                <i class="bi bi-chat-dots-fill"></i>
+                                Konseling
                             </div>
                         </div>
-                        <div class="bar-label">Konseling</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Title -->
+    <h2 class="section-title-admin">
+        <i class="bi bi-info-circle-fill me-2"></i>Informasi Sistem
+    </h2>
+
+    <!-- Info Cards -->
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="info-card-admin info-primary-admin">
+                <div class="info-icon-admin">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <div class="info-content-admin">
+                    <h6>Sistem Aman</h6>
+                    <p>Keamanan terjaga dengan baik</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="info-card-admin info-success-admin">
+                <div class="info-icon-admin">
+                    <i class="bi bi-graph-up-arrow"></i>
+                </div>
+                <div class="info-content-admin">
+                    <h6>Berjalan Optimal</h6>
+                    <p>Semua layanan beroperasi normal</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="info-card-admin info-warning-admin">
+                <div class="info-icon-admin">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <div class="info-content-admin">
+                    <h6>Update Realtime</h6>
+                    <p>Data ter-update secara otomatis</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<h2 class="section-title">Informasi Sistem</h2>
-
-<div class="row g-3">
-    <div class="col-lg-4 col-md-6">
-        <div class="info-card-custom primary">
-            <i class="bi bi-shield-check"></i>
-            <div>
-                <h6>Sistem Aman</h6>
-                <p>Keamanan terjaga dengan baik</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6">
-        <div class="info-card-custom success">
-            <i class="bi bi-graph-up-arrow"></i>
-            <div>
-                <h6>Berjalan Optimal</h6>
-                <p>Semua layanan beroperasi normal</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6">
-        <div class="info-card-custom warning">
-            <i class="bi bi-clock-history"></i>
-            <div>
-                <h6>Update Realtime</h6>
-                <p>Data ter-update secara otomatis</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <style>
-.page-title {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
+/* Container */
+.dashboard-admin-container {
+    padding: 2rem 0;
 }
 
-.section-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 2rem 0 1rem 0;
-}
-
-.row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: transform 0.2s;
-}
-
-.stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.stat-card.primary {
-    border-left: 4px solid #6ba5a7;
-}
-
-.stat-card.success {
-    border-left: 4px solid #5cb85c;
-}
-
-.stat-card.warning {
-    border-left: 4px solid #f0ad4e;
-}
-
-.stat-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.8rem;
-}
-
-.stat-card.primary .stat-icon {
-    background: rgba(107, 165, 167, 0.1);
-    color: #6ba5a7;
-}
-
-.stat-card.success .stat-icon {
-    background: rgba(92, 184, 92, 0.1);
-    color: #5cb85c;
-}
-
-.stat-card.warning .stat-icon {
-    background: rgba(240, 173, 78, 0.1);
-    color: #f0ad4e;
-}
-
-.stat-card h6 {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    font-weight: 500;
-}
-
-.stat-card h3 {
-    margin: 0.3rem 0 0 0;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #2c3e50;
-}
-
-.table-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
-
-.card-header-custom {
-    padding: 1.25rem;
-    border-bottom: 1px solid #ecf0f1;
+/* Page Header */
+.page-header-admin {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, #4D869C 0%, #3a6b7d 100%);
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 4px 16px rgba(77, 134, 156, 0.3);
 }
 
-.card-header-custom h5 {
-    color: #2c3e50;
+.header-content-admin {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-icon-admin {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+}
+
+.page-title-admin {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.page-subtitle-admin {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0.25rem 0 0 0;
+}
+
+.header-date-admin {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    font-size: 0.875rem;
+}
+
+/* Statistics Cards */
+.stat-card-admin {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    height: 100%;
+}
+
+.stat-card-admin:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card-body-admin {
+    padding: 1.5rem;
+}
+
+.stat-content-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.stat-info-admin {
+    flex: 1;
+}
+
+.stat-label-admin {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value-admin {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    line-height: 1;
+}
+
+.stat-badge-admin {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
-.chart-container {
+.badge-primary-admin {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.badge-success-admin {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge-warning-admin {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.stat-icon-wrapper-admin {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+}
+
+.stat-icon-primary-admin {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #2563eb;
+}
+
+.stat-icon-success-admin {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #059669;
+}
+
+.stat-icon-warning-admin {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #d97706;
+}
+
+.stat-footer-admin {
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.stat-trend-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: #64748b;
+}
+
+/* Color Variants */
+.stat-primary-admin .stat-value-admin {
+    color: #2563eb;
+}
+
+.stat-success-admin .stat-value-admin {
+    color: #059669;
+}
+
+.stat-warning-admin .stat-value-admin {
+    color: #d97706;
+}
+
+/* Section Title */
+.section-title-admin {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 2.5rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Chart Cards */
+.chart-card-admin {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    height: 100%;
+}
+
+.chart-header-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.chart-header-content-admin {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.chart-header-content-admin i {
+    color: #4D869C;
+    font-size: 1.25rem;
+}
+
+.chart-badge-admin {
+    padding: 0.375rem 0.875rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.chart-body-admin {
     padding: 2rem;
 }
 
-.pie-chart-wrapper {
+/* Pie Chart */
+.pie-chart-container-admin {
     display: flex;
     justify-content: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-.pie-svg {
-    width: 200px;
-    height: 200px;
+.pie-svg-admin {
+    width: 220px;
+    height: 220px;
 }
 
-.pie-label {
-    font-size: 12px;
-    fill: #7f8c8d;
+.pie-slice {
+    transition: all 0.3s ease;
+}
+
+.pie-label-admin {
+    font-size: 14px;
+    fill: #64748b;
     font-weight: 600;
 }
 
-.pie-value {
-    font-size: 24px;
-    fill: #2c3e50;
+.pie-value-admin {
+    font-size: 28px;
+    fill: #1e293b;
     font-weight: 700;
 }
 
-.chart-legend {
+.chart-legend-admin {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-.legend-item {
+.legend-item-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.legend-item-admin:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.legend-indicator-admin {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 6px;
 }
 
-.legend-dot {
-    width: 12px;
-    height: 12px;
+.legend-dot-admin {
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.legend-text {
-    flex: 1;
-    color: #7f8c8d;
-    font-size: 0.9rem;
+.legend-text-admin {
+    color: #64748b;
+    font-size: 0.9375rem;
+    font-weight: 500;
 }
 
-.legend-item strong {
-    color: #2c3e50;
+.legend-value-admin {
+    color: #1e293b;
+    font-size: 1rem;
 }
 
-.bar-chart {
+.legend-value-admin small {
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+/* Bar Chart */
+.bar-chart-admin {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
-    height: 250px;
+    height: 280px;
     gap: 2rem;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
-.bar-item {
+.bar-item-admin {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-.bar-wrapper {
+.bar-wrapper-admin {
     width: 100%;
-    height: 200px;
+    height: 220px;
     display: flex;
     align-items: flex-end;
 }
 
-.bar-fill {
+.bar-fill-admin {
     width: 100%;
-    border-radius: 6px 6px 0 0;
-    transition: height 1s ease;
+    border-radius: 12px 12px 0 0;
+    transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     justify-content: center;
-    padding-top: 0.5rem;
+    align-items: flex-start;
+    padding-top: 1rem;
+    position: relative;
 }
 
-.bar-primary {
-    background: #6ba5a7;
+.bar-primary-fill-admin {
+    background: linear-gradient(180deg, #4D869C 0%, #3a6b7d 100%);
 }
 
-.bar-success {
-    background: #5cb85c;
+.bar-success-fill-admin {
+    background: linear-gradient(180deg, #10b981 0%, #059669 100%);
 }
 
-.bar-warning {
-    background: #f0ad4e;
+.bar-warning-fill-admin {
+    background: linear-gradient(180deg, #f59e0b 0%, #d97706 100%);
 }
 
-.bar-value {
+.bar-value-admin {
     color: white;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
 }
 
-.bar-label {
+.bar-label-admin {
     font-weight: 600;
-    color: #2c3e50;
-}
-
-.info-card-custom {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #1e293b;
+    font-size: 0.9375rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-left: 4px solid;
+    gap: 0.5rem;
 }
 
-.info-card-custom.primary {
-    border-color: #6ba5a7;
+.bar-label-admin i {
+    font-size: 1.125rem;
 }
 
-.info-card-custom.success {
-    border-color: #5cb85c;
+/* Info Cards */
+.info-card-admin {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 2px solid;
+    transition: all 0.3s ease;
 }
 
-.info-card-custom.warning {
-    border-color: #f0ad4e;
+.info-card-admin:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-.info-card-custom i {
-    font-size: 2rem;
+.info-primary-admin {
+    border-color: #4D869C;
 }
 
-.info-card-custom.primary i {
-    color: #6ba5a7;
+.info-success-admin {
+    border-color: #10b981;
 }
 
-.info-card-custom.success i {
-    color: #5cb85c;
+.info-warning-admin {
+    border-color: #f59e0b;
 }
 
-.info-card-custom.warning i {
-    color: #f0ad4e;
+.info-icon-admin {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
 }
 
-.info-card-custom h6 {
-    margin: 0;
+.info-primary-admin .info-icon-admin {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #4D869C;
+}
+
+.info-success-admin .info-icon-admin {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #10b981;
+}
+
+.info-warning-admin .info-icon-admin {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    color: #f59e0b;
+}
+
+.info-content-admin h6 {
+    margin: 0 0 0.375rem 0;
     font-size: 1rem;
-    font-weight: 600;
-    color: #2c3e50;
+    font-weight: 700;
+    color: #1e293b;
 }
 
-.info-card-custom p {
-    margin: 0.25rem 0 0 0;
-    font-size: 0.85rem;
-    color: #7f8c8d;
+.info-content-admin p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #64748b;
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-    .page-title {
-        font-size: 1.5rem;
+    .dashboard-admin-container {
+        padding: 1rem 0;
     }
-    
-    .stat-card h3 {
-        font-size: 1.5rem;
-    }
-    
-    .bar-chart {
+
+    .page-header-admin {
+        flex-direction: column;
         gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .page-title-admin {
+        font-size: 1.5rem;
+    }
+
+    .stat-value-admin {
+        font-size: 2rem;
+    }
+
+    .stat-icon-wrapper-admin {
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+
+    .bar-chart-admin {
+        gap: 1rem;
+        height: 220px;
+    }
+
+    .bar-wrapper-admin {
+        height: 160px;
+    }
+
+    .chart-body-admin {
+        padding: 1.5rem;
+    }
+
+    .pie-svg-admin {
+        width: 180px;
+        height: 180px;
     }
 }
 </style>
+
+<script>
+// Animation on load
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.stat-card-admin, .chart-card-admin, .info-card-admin');
+    
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 100);
+    });
+});
+</script>
+
 @endsection

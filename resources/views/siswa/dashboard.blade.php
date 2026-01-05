@@ -6,7 +6,7 @@
     <div class="dashboard-header">
         <div class="header-content">
             <div class="header-icon">
-                <i class="bi bi-speedometer2"></i>
+                <i class="bi bi-house-door-fill"></i>
             </div>
             <div>
                 <h1 class="page-title">Dashboard Siswa</h1>
@@ -15,7 +15,7 @@
         </div>
         <div class="header-actions">
             <span class="last-update">
-                <i class="bi bi-clock"></i> Terakhir diperbarui: {{ date('d M Y, H:i') }}
+                <i class="bi bi-clock"></i> {{ date('d M Y, H:i') }}
             </span>
         </div>
     </div>
@@ -36,11 +36,11 @@
         @elseif($lastKonseling->status == 'terjadwal')
         <div class="notification-content notification-primary">
             <div class="notification-icon">
-                <i class="bi bi-arrow-repeat"></i>
+                <i class="bi bi-calendar-check"></i>
             </div>
             <div class="notification-text">
-                <h5>Konseling Sedang Diproses</h5>
-                <p>Konseling Anda sedang <strong>dalam proses</strong> penanganan oleh Guru BK.</p>
+                <h5>Konseling Terjadwal</h5>
+                <p>Konseling Anda sudah <strong>dijadwalkan</strong> oleh Guru BK.</p>
             </div>
         </div>
         @else
@@ -79,25 +79,24 @@
                 <div class="stat-card-body">
                     <div class="stat-content">
                         <div class="stat-info">
-                            <p class="stat-label">Konseling Terjadwal</p>
-                          <h2 class="stat-value">{{ $terjadwal }}</h2>
-
-                            <span class="stat-badge badge-warning">Perlu Respon</span>
+                            <p class="stat-label">Terjadwal</p>
+                            <h2 class="stat-value">{{ $terjadwal }}</h2>
+                            <span class="stat-badge badge-warning">Dijadwalkan</span>
                         </div>
                         <div class="stat-icon-wrapper stat-icon-warning">
-                            <i class="bi bi-hourglass-split"></i>
+                            <i class="bi bi-calendar-check"></i>
                         </div>
                     </div>
                     <div class="stat-footer">
                         <span class="stat-trend">
-                            <i class="bi bi-arrow-up"></i> Menunggu perhatian Guru BK
+                            <i class="bi bi-clock"></i> Menunggu jadwal konseling
                         </span>
                     </div>
                 </div>
             </div>
         </div>
 
-           <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="stat-card stat-success">
                 <div class="stat-card-body">
                     <div class="stat-content">
@@ -118,7 +117,7 @@
                 </div>
             </div>
         </div>
-      
+
         <div class="col-lg-4 col-md-6">
             <div class="stat-card stat-danger">
                 <div class="stat-card-body">
@@ -126,7 +125,7 @@
                         <div class="stat-info">
                             <p class="stat-label">Dibatalkan</p>
                             <h2 class="stat-value">{{ $batal }}</h2>
-                            <span class="stat-badge badge-danger">Dibatalkan</span>
+                            <span class="stat-badge badge-danger">Cancelled</span>
                         </div>
                         <div class="stat-icon-wrapper stat-icon-danger">
                             <i class="bi bi-x-circle-fill"></i>
@@ -134,13 +133,12 @@
                     </div>
                     <div class="stat-footer">
                         <span class="stat-trend">
-                            <i class="bi bi-dash-circle"></i> Konseling telah dibatalkan
+                            <i class="bi bi-dash-circle"></i> Konseling dibatalkan
                         </span>
                     </div>
                 </div>
             </div>
         </div>
-      
     </div>
 
     {{-- ================= QUICK ACTIONS ================= --}}
@@ -220,6 +218,14 @@
 </div>
 
 <style>
+/* Color Variables */
+:root {
+    --color-mint: #CDE8E5;
+    --color-light-blue: #EEF7FF;
+    --color-teal: #7AB2B2;
+    --color-dark-teal: #4D869C;
+}
+
 /* Dashboard Container */
 .dashboard-container {
     padding: 2rem 0;
@@ -229,10 +235,13 @@
 .dashboard-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--color-dark-teal) 0%, #3a6b7d 100%);
+    border-radius: 16px;
+    color: white;
+    box-shadow: 0 4px 16px rgba(77, 134, 156, 0.3);
 }
 
 .header-content {
@@ -242,35 +251,32 @@
 }
 
 .header-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-    border-radius: 16px;
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    color: white;
-    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    font-size: 1.75rem;
 }
 
 .page-title {
     font-size: 1.875rem;
     font-weight: 700;
-    color: #1a202c;
     margin: 0;
 }
 
 .page-subtitle {
     font-size: 0.9375rem;
-    color: #64748b;
-    margin: 0.5rem 0 0 0;
+    margin: 0.25rem 0 0 0;
+    opacity: 0.95;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
 }
 
 .last-update {
@@ -278,10 +284,10 @@
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 1rem;
-    background: #f7fafc;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
     border-radius: 8px;
     font-size: 0.875rem;
-    color: #64748b;
 }
 
 /* Notification Card */
@@ -342,7 +348,7 @@
 
 /* Notification Variants */
 .notification-warning {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: linear-gradient(135deg, #fef9e7 0%, #fdeaa8 100%);
     color: #92400e;
 }
 
@@ -351,17 +357,13 @@
     color: white;
 }
 
-.notification-warning .btn-view-solution {
-    color: #92400e;
-}
-
 .notification-primary {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    color: #1e40af;
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-mint) 100%);
+    color: var(--color-dark-teal);
 }
 
 .notification-primary .notification-icon {
-    background: #3b82f6;
+    background: var(--color-teal);
     color: white;
 }
 
@@ -448,18 +450,18 @@
 }
 
 .badge-warning {
-    background: #fef3c7;
+    background: #fef9e7;
     color: #92400e;
-}
-
-.badge-primary {
-    background: #dbeafe;
-    color: #1e40af;
 }
 
 .badge-success {
     background: #d1fae5;
     color: #065f46;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 .stat-icon-wrapper {
@@ -473,18 +475,18 @@
 }
 
 .stat-icon-warning {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: linear-gradient(135deg, #fef9e7 0%, #fdeaa8 100%);
     color: #d97706;
-}
-
-.stat-icon-primary {
-    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-    color: #2563eb;
 }
 
 .stat-icon-success {
     background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
     color: #059669;
+}
+
+.stat-icon-danger {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #dc2626;
 }
 
 .stat-footer {
@@ -505,12 +507,12 @@
     color: #d97706;
 }
 
-.stat-primary .stat-value {
-    color: #2563eb;
-}
-
 .stat-success .stat-value {
     color: #059669;
+}
+
+.stat-danger .stat-value {
+    color: #dc2626;
 }
 
 /* Quick Actions Section */
@@ -558,11 +560,11 @@
 }
 
 .action-primary {
-    border-color: #3b82f6;
+    border-color: var(--color-teal);
 }
 
 .action-primary:hover {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    background: linear-gradient(135deg, var(--color-light-blue) 0%, var(--color-mint) 100%);
 }
 
 .action-secondary {
@@ -585,9 +587,9 @@
 }
 
 .action-primary .action-icon {
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     color: white;
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(77, 134, 156, 0.3);
 }
 
 .action-secondary .action-icon {
@@ -607,7 +609,7 @@
 }
 
 .action-primary .action-content h4 {
-    color: #1e40af;
+    color: var(--color-dark-teal);
 }
 
 .action-secondary .action-content h4 {
@@ -628,7 +630,7 @@
 }
 
 .action-primary .action-arrow {
-    color: #3b82f6;
+    color: var(--color-teal);
 }
 
 .action-secondary .action-arrow {
@@ -682,7 +684,7 @@
 .tip-number {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+    background: linear-gradient(135deg, var(--color-teal) 0%, var(--color-dark-teal) 100%);
     color: white;
     border-radius: 8px;
     display: flex;
@@ -711,6 +713,8 @@
 @media (max-width: 768px) {
     .dashboard-header {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
     }
 
     .page-title {
@@ -745,24 +749,24 @@
         grid-template-columns: 1fr;
     }
 }
-</style>
 
-<script>
-// Add entrance animation
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.stat-card, .action-card, .tip-item');
-    
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            card.style.transition = 'all 0.6s ease';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }, index * 100);
-    });
-});
-</script>
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card,
+.action-card,
+.tip-item {
+    animation: fadeIn 0.5s ease-out;
+}
+</style>
 
 @endsection

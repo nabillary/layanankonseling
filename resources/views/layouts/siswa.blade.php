@@ -1,3 +1,7 @@
+@php
+    $siswa = \App\Models\Siswa::first();
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -120,10 +120,18 @@
     <h3>Login Sistem BK</h3>
     <p class="subtitle">Masuk menggunakan akun Anda</p>
 
+    {{-- ERROR LOGIN --}}
     @if(session('error'))
     <div class="alert alert-danger py-2">
         {{ session('error') }}
     </div>
+    @endif
+
+    {{-- ERROR VALIDASI --}}
+    @if ($errors->any())
+        <div class="alert alert-danger py-2">
+            {{ $errors->first() }}
+        </div>
     @endif
 
     <form action="{{ route('login.process') }}" method="POST">
@@ -135,8 +143,8 @@
                 type="text"
                 class="form-control"
                 name="username"
-                required
-                placeholder="Masukkan username Anda">
+                value="{{ old('username') }}"
+                required>
         </div>
 
         <div class="mb-3">
@@ -145,19 +153,25 @@
                 type="password"
                 class="form-control"
                 name="password"
-                required
-                placeholder="Masukkan password">
+                required>
         </div>
 
-        <button class="btn-login">
+        {{-- 🔐 reCAPTCHA --}}
+        <div class="mb-3">
+            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
+        </div>
+
+        <button class="btn-login w-100">
             <i class="bi bi-box-arrow-in-right me-2"></i>Masuk
         </button>
-
     </form>
 
     <p class="footer-text">BK SMKN 11 Bandung — {{ date('Y') }}</p>
 
 </div>
+
+{{-- SCRIPT reCAPTCHA --}}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </body>
 </html>
